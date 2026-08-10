@@ -22,3 +22,6 @@ dist-ssr
 # Env
 .env
 .env.*
+
+# Cloudflare local tooling (not part of source)
+.wrangler
