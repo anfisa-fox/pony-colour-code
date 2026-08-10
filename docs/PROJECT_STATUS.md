@@ -82,6 +82,10 @@ Deploy is **independent** from My World (see ADR-001).
 - START layout may be tight on ~421–480 px widths (observation backlog)
 - Duplicate characters in secret/guess are **allowed by design** — not a bug
 
+### Known observations (post-freeze, pre–Beta 2)
+
+**Mobile GAME controls require scrolling (CONFIRMED)** — On real mobile devices, `Удалить` and `Подтвердить` sit below the Character Palette; players must scroll down after each character selection to confirm or remove. Production remains **playable**; Beta 1 remains **accepted**; project remains **frozen for user testing**. This does **not** reopen development. Fix deferred to post-Beta prioritization — backlog **P1-04** ([BACKLOG.md](BACKLOG.md)).
+
 ---
 
 ## Next phase

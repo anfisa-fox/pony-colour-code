@@ -14,6 +14,26 @@ Do **not** treat duplicate characters or scoring engine as defects — see [HAND
 | P1-01 | P1 | Open | Real child Beta 1 playtest | Completed session(s) using [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md); observations recorded; PO review |
 | P1-02 | P1 | Open | Enable Pony Colour Code → My World navigation | `MyWorldLink` becomes working `<a href>` to My World production URL; accessible label; no broken link |
 | P1-03 | P1 | Open | Add My World → Pony Colour Code entry point | Link in My World nav or home to `https://pony-colour-code.pages.dev/`; independent deploy preserved (ADR-001) |
+| P1-04 | P1 | **CONFIRMED** — observed on production / real mobile device | **Mobile GAME controls require scrolling** | See [P1-04 detail](#p1-04-mobile-game-controls-require-scrolling) below |
+
+### P1-04: Mobile GAME controls require scrolling
+
+**Problem:** On a real mobile device the GAME screen is functional, but the primary controls `Удалить` and `Подтвердить` are positioned below the Character Palette. After selecting characters, the player must scroll down to perform the main action of the turn. This creates unnecessary repeated scrolling in the core mobile gameplay loop.
+
+**Goal:** Primary GAME actions should be available without mandatory downward scrolling after character selection.
+
+**Design directions to evaluate later (do not implement now):**
+
+- **A.** Move mobile controls closer to Current Guess / above Character Palette
+- **B.** Introduce an appropriate sticky action area
+
+Desktop layout should not be changed merely to solve the mobile issue. Mobile browser chrome and safe-area behaviour must be considered.
+
+**Acceptance criteria (future implementation):**
+
+On a typical supported mobile viewport, after selecting characters, the player can remove the latest selection and confirm a completed guess **without mandatory additional scrolling** down the page. Controls must remain visible/usable and must not be obscured by mobile browser chrome or safe areas.
+
+**Evidence:** Observed by Product Owner on published Beta 1 production build using a real mobile browser. Production URL: https://pony-colour-code.pages.dev/
 
 ---
 

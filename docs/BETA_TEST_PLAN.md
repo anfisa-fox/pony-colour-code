@@ -30,6 +30,19 @@ During or after the session, note:
 7. Is **RESULT** (win/loss) clear?
 8. Do they want to play again?
 9. Where do they stop or ask for help?
+10. On **mobile**, does repeated scrolling between Current Guess, Character Palette, and primary controls (`Удалить` / `Подтвердить`) cause confusion, accidental actions, loss of context, or frustration?
+
+---
+
+## Pre-existing Beta observations (do not treat as newly discovered)
+
+The following was **already confirmed by Product Owner** on production before or during Beta 1 testing. Future testers reporting the same behaviour should reference backlog **P1-04**, not file a new defect.
+
+| ID | Observation | Status |
+|----|-------------|--------|
+| P1-04 | **Mobile GAME controls require scrolling** — after selecting characters on a real mobile device, `Удалить` and `Подтвердить` are below the Character Palette; player must scroll down each turn | CONFIRMED on https://pony-colour-code.pages.dev/ |
+
+During Beta testing, still observe **behavioural impact** of this layout (confusion, frustration, accidental taps) — but do **not** prescribe a layout solution in test notes. Evidence informs post-Beta design choice (see BACKLOG P1-04 directions A/B).
 
 ---
 
