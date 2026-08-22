@@ -7,7 +7,9 @@ function App() {
   const { state, dispatch, actions } = useGameSession();
 
   if (state.phase === "start") {
-    return <StartScreen onStart={() => dispatch(actions.startGame())} />;
+    return (
+      <StartScreen onStart={(mode) => dispatch(actions.startGame(mode))} />
+    );
   }
 
   if (state.phase === "playing") {

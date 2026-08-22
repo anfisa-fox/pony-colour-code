@@ -1,6 +1,7 @@
-/** Fixed MVP rules — not a configurable mode system. */
+/** Fixed game rules. Sprint 2: two modes (see sessionTypes GameMode). */
 
 export const CODE_LENGTH = 4;
+export const DEFAULT_GAME_MODE = "beginner" as const;
 export const MAX_ATTEMPTS = 10;
 export const ALLOW_DUPLICATES = true;
 

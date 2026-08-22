@@ -1,13 +1,21 @@
-import { CODE_LENGTH, MAX_ATTEMPTS } from "./config";
-import { evaluateGuess, generateSecret, isWinningGuess } from "./engine";
+import { CODE_LENGTH, DEFAULT_GAME_MODE, MAX_ATTEMPTS } from "./config";
+import {
+  evaluateGuess,
+  evaluateGuessPositional,
+  generateSecret,
+  isWinningGuess,
+} from "./engine";
+import type { GameMode, PonyId } from "./types";
 import type {
   GameSessionAction,
   GameSessionState,
+  GuessRecord,
 } from "./sessionTypes";
 
 export function createInitialState(): GameSessionState {
   return {
     phase: "start",
+    gameMode: DEFAULT_GAME_MODE,
     secret: [],
     currentGuess: [],
     history: [],
@@ -15,14 +23,34 @@ export function createInitialState(): GameSessionState {
   };
 }
 
-function createPlayingState(): GameSessionState {
+function createPlayingState(gameMode: GameMode): GameSessionState {
   return {
     phase: "playing",
+    gameMode,
     secret: generateSecret(),
     currentGuess: [],
     history: [],
     attemptsRemaining: MAX_ATTEMPTS,
   };
+}
+
+function buildGuessRecord(
+  secret: PonyId[],
+  guess: PonyId[],
+  gameMode: GameMode,
+): GuessRecord {
+  const result = evaluateGuess(secret, guess);
+  const record: GuessRecord = {
+    guess: [...guess],
+    exact: result.exact,
+    partial: result.partial,
+  };
+
+  if (gameMode === "beginner") {
+    record.positional = evaluateGuessPositional(secret, guess);
+  }
+
+  return record;
 }
 
 export function gameSessionReducer(
@@ -35,7 +63,7 @@ export function gameSessionReducer(
         return state;
       }
 
-      return createPlayingState();
+      return createPlayingState(action.mode ?? DEFAULT_GAME_MODE);
     }
 
     case "NEW_GAME": {
@@ -43,7 +71,7 @@ export function gameSessionReducer(
         return state;
       }
 
-      return createPlayingState();
+      return createPlayingState(state.gameMode);
     }
 
     case "ADD_PONY": {
@@ -81,18 +109,15 @@ export function gameSessionReducer(
         return state;
       }
 
-      const result = evaluateGuess(state.secret, state.currentGuess);
-      const history = [
-        ...state.history,
-        {
-          guess: [...state.currentGuess],
-          exact: result.exact,
-          partial: result.partial,
-        },
-      ];
+      const record = buildGuessRecord(
+        state.secret,
+        state.currentGuess,
+        state.gameMode,
+      );
+      const history = [...state.history, record];
       const attemptsRemaining = state.attemptsRemaining - 1;
 
-      if (isWinningGuess(result)) {
+      if (isWinningGuess({ exact: record.exact, partial: record.partial })) {
         return {
           ...state,
           phase: "won",
@@ -126,7 +151,10 @@ export function gameSessionReducer(
 }
 
 export const gameSessionActions = {
-  startGame: (): GameSessionAction => ({ type: "START_GAME" }),
+  startGame: (mode?: GameMode): GameSessionAction => ({
+    type: "START_GAME",
+    mode,
+  }),
   newGame: (): GameSessionAction => ({ type: "NEW_GAME" }),
   addPony: (ponyId: string): GameSessionAction => ({
     type: "ADD_PONY",

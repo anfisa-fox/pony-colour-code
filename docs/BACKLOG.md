@@ -3,9 +3,21 @@
 **Source of truth** for open work.  
 **Last updated:** 22 August 2026
 
+**Sprint 2 entry point:** [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md)
+
 Do **not** treat duplicate characters or Classic scoring engine as defects — see [HANDOVER.md](HANDOVER.md) invariants.
 
-**Sprint 2 entry point:** [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md)
+---
+
+## Sprint 2 — progress summary
+
+| Step | Status |
+|------|--------|
+| Шаг 1 — Dual-mode mechanics | **Done / Accepted** |
+| Шаг 2 — START / Mode Selection | **Done / Accepted** |
+| Шаг 3 — GAME dual-mode UI | **Not started** |
+| Mobile GAME / P1-04 | **Not started** |
+| Beta 2 release | **Not started** |
 
 ---
 
@@ -17,17 +29,17 @@ Do **not** treat duplicate characters or Classic scoring engine as defects — s
 
 ---
 
-## Sprint 2 — in scope (approved, not yet implemented)
+## Sprint 2 — in scope
 
 | ID | Priority | Status | Description | Spec / acceptance |
 |----|----------|--------|-------------|-------------------|
-| S2-01 | P0 | Open | **Beginner Mode** — positional feedback, duplicate-safe algorithm | [BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md); invariant with Classic |
-| S2-02 | P0 | Open | **Classic Mode regression preservation** | Beta 1 `evaluateGuess()` unchanged; 24+ tests pass |
-| S2-03 | P0 | Open | **Mode Selection UX** on START — Beginner default/recommended | [MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
+| S2-01 | P0 | **Done** | **Beginner Mode** — positional feedback, duplicate-safe algorithm | Engine + Session; GAME UI — Step 3 |
+| S2-02 | P0 | **Done** | **Classic Mode regression preservation** | `evaluateGuess()` unchanged; Classic tests pass |
+| S2-03 | P0 | **Done** | **Mode Selection UX** on START — Beginner default | [MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md); PO accepted 22 Aug 2026 |
 | S2-04 | P0 | Open | **Mobile GAME UX** — resolve P1-04 | [MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
 | S2-05 | P1 | Open | **START + RESULT mobile review** | Usable on 375px portrait; see planning docs |
-| S2-06 | P1 | Open | **Android readiness constraints** in implementation | [ANDROID_READINESS.md](planning/ANDROID_READINESS.md) |
-| S2-07 | P0 | Open | **Automated tests** for Beginner + mode session | ≥12 Beginner engine tests; Classic regression |
+| S2-06 | P1 | Open | **Android readiness constraints** in implementation | [ANDROID_READINESS.md](planning/ANDROID_READINESS.md) — out of sprint implementation |
+| S2-07 | P0 | **Partial** | **Automated tests** for Beginner + mode session | Engine/Session/mode flow — done; GAME UI tests — Step 3 |
 | S2-08 | P1 | Open | **Web Beta 2 release preparation** | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) checklist |
 
 ### P1-04 traceability (origin → Sprint 2)
@@ -68,7 +80,7 @@ Do **not** treat duplicate characters or Classic scoring engine as defects — s
 
 | ID | Priority | Status | Description | Notes |
 |----|----------|--------|-------------|-------|
-| P3-01 | P3 | Partial → S2-07 | Extend scoring regression / property test coverage | Beginner invariant tests in S2-07 |
+| P3-01 | P3 | **Partial** | Extend scoring regression / property test coverage | Beginner invariant tests done (S2-07 partial) |
 | P3-02 | P3 | Open | Duplicate-heavy multi-attempt scenario regression | Consider in S2-07 |
 | P3-03 | P3 | Open | `feedbackUtils` / session round-trip tests | Consider in S2-07 |
 | P3-04 | P3 | Deferred | Optimize static character assets | Out of Sprint 2 unless required |

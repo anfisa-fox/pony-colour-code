@@ -3,7 +3,7 @@ import { FEEDBACK_IMAGES, FEEDBACK_LABELS } from "./feedbackUtils";
 
 type FeedbackTokenProps = {
   type: FeedbackType;
-  size?: "history" | "legend";
+  size?: "history" | "legend" | "demo";
 };
 
 export function FeedbackToken({ type, size = "history" }: FeedbackTokenProps) {

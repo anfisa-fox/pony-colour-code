@@ -9,7 +9,7 @@
 
 | Phase | Document |
 |-------|----------|
-| **Current: Sprint 2 implementation** | [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) |
+| **Current: Sprint 2 Step 3** | [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) |
 | Beginner scoring | [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) |
 | Mode selection UX | [planning/MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
 | Mobile GAME (P1-04) | [planning/MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
@@ -21,24 +21,29 @@
 
 ---
 
-## 1. Product purpose
-
-**Pony Colour Code** is a family browser game: guess a hidden 4-pony code using Mastermind-style feedback. Target user: child in a family creative-world context. Thematic tie to **My World** (separate site); production Beta 1 at https://pony-colour-code.pages.dev/
-
----
-
-## 2. Current release state
+## 1. Where the project is now
 
 | | |
 |---|---|
 | Production (live) | **Beta 1** — https://pony-colour-code.pages.dev/ |
-| Beta 1 runtime baseline | `6353feceb2d4712697466672339842cdb0a384a1` |
-| Beta 1 tag | `beta-1` (historical) |
-| User testing | **Complete and successful** (22 Aug 2026) |
-| Next release | **Beta 2** (Sprint 2 web) — not yet released |
-| Implementation | Ready when PO authorizes — see Sprint 2 docs above |
+| Sprint 2 | **IN PROGRESS** — Steps 1+2 **accepted**; Step 3 **next** |
+| Beta 2 | **Not released**; no deployment from Steps 1+2 checkpoint |
+| Tests | **48/48** PASS (Engine, Session, mode selection flow) |
 
-See [RELEASE_BETA_1.md](RELEASE_BETA_1.md), [RELEASE_BETA_2.md](RELEASE_BETA_2.md), [PROJECT_STATUS.md](PROJECT_STATUS.md).
+**What Beta 1 is:** the validated, published web game (Classic mode only in GAME UI). Tag `beta-1` marks the historical project freeze; runtime baseline `6353fec`.
+
+**What changed in Sprint 2 so far:**
+
+- **Step 1:** dual-mode mechanics in Engine/Session (`beginner` positional, `classic` aggregate unchanged)
+- **Step 2:** START screen mode selection with shared Secret/Guess example and feedback inside mode cards
+
+**What production still shows:** Beta 1 GAME UI until Beta 2 is deployed. Beginner positional feedback in GAME history is **Step 3 — not started**.
+
+---
+
+## 2. Product purpose
+
+**Pony Colour Code** is a family browser game: guess a hidden 4-pony code using Mastermind-style feedback. Target user: child in a family creative-world context. Thematic tie to **My World** (separate site); production Beta 1 at https://pony-colour-code.pages.dev/
 
 ---
 
@@ -66,9 +71,11 @@ Classic `evaluateGuess()` was exhaustively validated pre-freeze — do **not** m
 
 Implementation: `src/game/engine.ts` → `evaluateGuess()`.
 
-### Sprint 2 / Beginner Mode (new — see spec)
+### Sprint 2 / Beginner Mode (engine — implemented)
 
-Positional GREEN / YELLOW / PINK per slot. Algorithm and Classic invariant: [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md).
+Positional GREEN / YELLOW / PINK per slot via `evaluateGuessPositional()`. Algorithm and Classic invariant: [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md).
+
+**GAME UI for Beginner feedback:** Step 3 — not yet implemented.
 
 ---
 
@@ -135,9 +142,12 @@ pony-colour-code/
 
 | File | Role |
 |------|------|
-| `src/game/config.ts` | `CODE_LENGTH=4`, `MAX_ATTEMPTS=10`, `ALLOW_DUPLICATES`, pony IDs |
-| `src/game/engine.ts` | `generateSecret`, `evaluateGuess`, `isWinningGuess` (+ `evaluateGuessPositional` Sprint 2) |
-| `src/game/sessionReducer.ts` | Phases: start / playing / won / lost |
+| `src/game/config.ts` | `CODE_LENGTH=4`, `MAX_ATTEMPTS=10`, `ALLOW_DUPLICATES`, `DEFAULT_GAME_MODE=beginner` |
+| `src/game/engine.ts` | `generateSecret`, `evaluateGuess`, `evaluateGuessPositional`, `isWinningGuess` |
+| `src/game/sessionReducer.ts` | Phases: start / playing / won / lost; `gameMode`; mode-aware guess records |
+| `src/screens/StartScreen.tsx` | Mode selection, Secret/Guess example, `startGame(mode)` |
+| `src/components/ModeSelector.tsx` | Beginner / Classic radio cards with feedback preview |
+| `src/components/GameExample.tsx` | Shared Secret/Guess illustration on START |
 | `src/data/characters.ts` | Russian names, colors, PNG paths, `mirrored` |
 | `src/components/feedbackUtils.ts` | exact/partial → medallion sequence (Classic) |
 | `src/components/MyWorldLink.tsx` | **Disabled placeholder** — P1-02 deferred |
@@ -153,10 +163,11 @@ npm test           # watch mode
 
 | File | Coverage |
 |------|----------|
-| `src/game/engine.test.ts` | Classic scoring, duplicates, win detection |
-| `src/game/sessionReducer.test.ts` | Phase transitions, history, attempt limits |
+| `src/game/engine.test.ts` | Classic + Beginner scoring, duplicates, invariant |
+| `src/game/sessionReducer.test.ts` | Phase transitions, history, mode persistence |
+| `src/game/modeSelectionFlow.test.ts` | START → session mode wiring |
 
-Sprint 2 adds Beginner positional tests — see [BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) §7.
+**48 tests** as of Steps 1+2 checkpoint.
 
 ---
 
@@ -185,7 +196,7 @@ No `.env` required.
 | Output | `dist/` |
 | URL | https://pony-colour-code.pages.dev/ |
 
-Independent from My World (ADR-001). Beta 2 deploy when PO authorizes post-implementation.
+Independent from My World (ADR-001). Beta 2 deploy when PO authorizes after Sprint 2 completion.
 
 ---
 
@@ -213,7 +224,7 @@ Independent from My World (ADR-001). Beta 2 deploy when PO authorizes post-imple
 
 ## 12. Current backlog
 
-See [BACKLOG.md](BACKLOG.md) — Sprint 2 items S2-01…S2-08; deferred P1-02/P1-03; P2/P3 polish.
+See [BACKLOG.md](BACKLOG.md) — S2-01…S2-03 done; S2-04+ open; P1-04 → S2-04; Android after Beta 2.
 
 ---
 
@@ -225,17 +236,18 @@ Historical test plan: [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md).
 
 ---
 
-## 14. Recommended start for Sprint 2 implementation
+## 14. Recommended next work (Step 3+)
 
-1. Read [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) and linked specs
-2. `npm install`; `npm run test:run && npm run build` — confirm 24/24 baseline
-3. Implement Beginner engine + tests first (S2-01, S2-07)
-4. Mode selection + session (S2-03)
-5. Mobile GAME layout (S2-04) — verify P1-04 acceptance
-6. Classic regression pass (S2-02)
-7. Beta 2 checklist [RELEASE_BETA_2.md](RELEASE_BETA_2.md)
+1. Read [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) progress section
+2. `npm install`; `npm run test:run && npm run build` — confirm 48/48 baseline
+3. **Step 3:** GAME dual-mode feedback UI (Beginner positional in history; Classic unchanged)
+4. Mobile GAME layout (S2-04) — verify P1-04 acceptance
+5. Mobile START/RESULT polish (S2-05)
+6. Beta 2 checklist [RELEASE_BETA_2.md](RELEASE_BETA_2.md)
 
 Do not modify Classic `evaluateGuess()` semantics.
+
+**Android / Capacitor:** planned as a separate major phase **after Beta 2** — constraints in [ANDROID_READINESS.md](planning/ANDROID_READINESS.md); not started.
 
 ---
 

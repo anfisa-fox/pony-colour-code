@@ -2,16 +2,16 @@
 
 Браузерная игра «угадай код» в духе Mastermind с персонажами G4 Mane 6. Часть семейного проекта **My World**, опубликована как **отдельное standalone-приложение**.
 
-## Status: Sprint 2 — Ready for implementation
+## Status: Sprint 2 — IN PROGRESS
 
 | | |
 |---|---|
 | **Production (Beta 1)** | https://pony-colour-code.pages.dev/ |
 | **Repository** | https://github.com/anfisa-fox/pony-colour-code |
 | **Beta 1 runtime baseline** | `6353feceb2d4712697466672339842cdb0a384a1` — *Beta 1: initial playable release* |
-| **Current phase** | Sprint 2 planning complete — implementation authorized separately |
+| **Sprint 2 progress** | Steps 1–2 **accepted**; next: GAME dual-mode feedback UI (Step 3) |
 
-Beta 1 user testing is **complete and successful**. Sprint 2 adds Beginner Mode, mode selection, and mobile GAME improvements while preserving Classic (Beta 1) gameplay.
+Beta 1 user testing is **complete and successful**. Sprint 2 adds Beginner Mode, mode selection, and mobile GAME improvements while preserving Classic (Beta 1) gameplay. **Beta 2 is not yet released** — production still serves Beta 1.
 
 > **Sprint 2 entry point:** [`docs/planning/SPRINT_2_SCOPE.md`](docs/planning/SPRINT_2_SCOPE.md)
 
@@ -27,7 +27,7 @@ Beta 1 user testing is **complete and successful**. Sprint 2 adds Beginner Mode,
 ```bash
 npm install
 npm run dev        # Vite dev server (default http://localhost:5173)
-npm run test:run   # 24 unit tests
+npm run test:run   # 48 unit tests
 npm run build      # production build → dist/
 npm run preview    # serve dist/ locally
 ```

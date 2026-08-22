@@ -246,6 +246,61 @@ body {
   box-shadow: var(--shadow-soft);
 }
 
+.start-example {
+  margin: 0 0 var(--space-sm);
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.start-example__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
+}
+
+.start-example__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.start-example__label {
+  flex: 0 0 3.4rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--color-muted);
+  text-align: right;
+}
+
+.start-example__ponies {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  align-items: center;
+}
+
+.start-example__pony {
+  display: block;
+  width: 2.1rem;
+  height: 1.9rem;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.start-example__pony--mirrored {
+  transform: scaleX(-1);
+}
+
+.start-mode .section-heading {
+  margin-bottom: var(--space-sm);
+}
+
 .start-legend .section-heading {
   margin-bottom: var(--space-sm);
 }
@@ -270,6 +325,91 @@ body {
 
 .start-actions {
   margin-top: auto;
+}
+
+.start-mode {
+  margin: 0;
+}
+
+.start-mode .section-heading {
+  margin-bottom: var(--space-sm);
+}
+
+.mode-selector {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.mode-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition:
+    border-color var(--transition-playful),
+    background var(--transition-playful),
+    box-shadow var(--transition-playful),
+    transform var(--transition-playful);
+}
+
+.mode-card:hover {
+  border-color: color-mix(in srgb, var(--color-primary) 35%, var(--color-border));
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-panel);
+}
+
+.mode-card:focus {
+  outline: none;
+}
+
+.mode-card:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.mode-card--selected {
+  border-color: var(--color-primary);
+  background: linear-gradient(
+    165deg,
+    var(--color-surface) 0%,
+    color-mix(in srgb, var(--color-primary) 12%, var(--color-accent-warm)) 100%
+  );
+  box-shadow: var(--shadow-panel-accent);
+}
+
+.mode-card__feedback {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.2rem;
+  justify-content: center;
+  min-height: 1.5rem;
+}
+
+.mode-card__title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--color-heading);
+}
+
+.mode-card__subtitle {
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-muted);
 }
 
 .screen--start .screen__nav {
@@ -761,6 +901,11 @@ body {
   height: 46px;
 }
 
+.feedback-token--demo {
+  width: 28px;
+  height: 28px;
+}
+
 .feedback-token--smile {
   border-color: #27ae60;
 }
@@ -948,6 +1093,54 @@ body {
     align-items: center;
     text-align: left;
     gap: var(--space-sm);
+  }
+
+  .mode-selector {
+    grid-template-columns: 1fr;
+  }
+
+  .screen--start {
+    gap: var(--space-md);
+  }
+
+  .start-header {
+    padding: var(--space-sm) var(--space-xs);
+  }
+
+  .start-hero-ensemble__figure {
+    height: clamp(72px, 20vw, 88px);
+  }
+
+  .start-example {
+    padding: 0.45rem 0.5rem;
+    margin-bottom: var(--space-sm);
+  }
+
+  .start-example__label {
+    flex-basis: 2.85rem;
+    font-size: 0.72rem;
+  }
+
+  .start-example__row {
+    gap: 0.3rem;
+  }
+
+  .start-example__pony {
+    width: 1.55rem;
+    height: 1.45rem;
+  }
+
+  .start-example__ponies {
+    gap: 0.15rem;
+  }
+
+  .mode-card__subtitle {
+    font-size: 0.72rem;
+  }
+
+  .feedback-token--demo {
+    width: 20px;
+    height: 20px;
   }
 }
 

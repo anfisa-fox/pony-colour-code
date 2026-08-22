@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { CODE_LENGTH, MAX_ATTEMPTS } from "./config";
+import { CODE_LENGTH, DEFAULT_GAME_MODE, MAX_ATTEMPTS } from "./config";
 import * as engine from "./engine";
 import {
   createInitialState,
@@ -22,9 +22,9 @@ function reduce(state: ReturnType<typeof createInitialState>, action: Parameters
   return gameSessionReducer(state, action);
 }
 
-function startPlaying() {
+function startPlaying(mode?: "beginner" | "classic") {
   vi.spyOn(engine, "generateSecret").mockReturnValue([...mockSecret]);
-  return reduce(createInitialState(), gameSessionActions.startGame());
+  return reduce(createInitialState(), gameSessionActions.startGame(mode));
 }
 
 function fillGuess(state: ReturnType<typeof createInitialState>, ponies: PonyId[]) {
@@ -42,6 +42,7 @@ describe("gameSessionReducer", () => {
   it("starts in START phase", () => {
     const state = createInitialState();
     expect(state.phase).toBe("start");
+    expect(state.gameMode).toBe(DEFAULT_GAME_MODE);
     expect(state.secret).toEqual([]);
     expect(state.currentGuess).toEqual([]);
     expect(state.history).toEqual([]);
@@ -52,6 +53,7 @@ describe("gameSessionReducer", () => {
     const state = startPlaying();
 
     expect(state.phase).toBe("playing");
+    expect(state.gameMode).toBe(DEFAULT_GAME_MODE);
     expect(state.secret).toEqual(mockSecret);
     expect(state.currentGuess).toEqual([]);
     expect(state.history).toEqual([]);
@@ -184,5 +186,85 @@ describe("gameSessionReducer", () => {
     expect(fresh.currentGuess).toEqual([]);
     expect(fresh.history).toEqual([]);
     expect(fresh.attemptsRemaining).toBe(MAX_ATTEMPTS);
+  });
+});
+
+describe("gameSessionReducer game modes", () => {
+  it("defaults to beginner when startGame is called without mode", () => {
+    const state = startPlaying();
+    expect(state.gameMode).toBe("beginner");
+  });
+
+  it("starts explicit classic mode", () => {
+    const state = startPlaying("classic");
+    expect(state.gameMode).toBe("classic");
+  });
+
+  it("starts explicit beginner mode", () => {
+    const state = startPlaying("beginner");
+    expect(state.gameMode).toBe("beginner");
+  });
+
+  it("stores positional feedback in beginner history on submit", () => {
+    const playing = startPlaying("beginner");
+    const ready = fillGuess(playing, [twilight, applejack, rainbow, fluttershy]);
+    const state = reduce(ready, gameSessionActions.submitGuess());
+
+    expect(state.history[0].exact).toBe(1);
+    expect(state.history[0].partial).toBe(2);
+    expect(state.history[0].positional).toEqual([
+      "green",
+      "yellow",
+      "yellow",
+      "pink",
+    ]);
+  });
+
+  it("stores aggregate-only history in classic mode on submit", () => {
+    const playing = startPlaying("classic");
+    const ready = fillGuess(playing, [twilight, applejack, rainbow, fluttershy]);
+    const state = reduce(ready, gameSessionActions.submitGuess());
+
+    expect(state.history[0].exact).toBe(1);
+    expect(state.history[0].partial).toBe(2);
+    expect(state.history[0].positional).toBeUndefined();
+  });
+
+  it("preserves gameMode on new game from RESULT", () => {
+    vi.spyOn(engine, "generateSecret")
+      .mockReturnValueOnce([...mockSecret])
+      .mockReturnValueOnce([...mockSecret]);
+
+    const classicWon = reduce(
+      fillGuess(startPlaying("classic"), [...mockSecret]),
+      gameSessionActions.submitGuess(),
+    );
+    const classicFresh = reduce(classicWon, gameSessionActions.newGame());
+    expect(classicFresh.gameMode).toBe("classic");
+
+    vi.spyOn(engine, "generateSecret")
+      .mockReturnValueOnce([...mockSecret])
+      .mockReturnValueOnce([...mockSecret]);
+
+    const beginnerWon = reduce(
+      fillGuess(startPlaying("beginner"), [...mockSecret]),
+      gameSessionActions.submitGuess(),
+    );
+    const beginnerFresh = reduce(beginnerWon, gameSessionActions.newGame());
+    expect(beginnerFresh.gameMode).toBe("beginner");
+  });
+
+  it("wins beginner session when all four positions are green", () => {
+    const playing = startPlaying("beginner");
+    const ready = fillGuess(playing, [...mockSecret]);
+    const state = reduce(ready, gameSessionActions.submitGuess());
+
+    expect(state.phase).toBe("won");
+    expect(state.history[0].positional).toEqual([
+      "green",
+      "green",
+      "green",
+      "green",
+    ]);
   });
 });

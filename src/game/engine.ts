@@ -1,5 +1,5 @@
 import { CODE_LENGTH, PONY_IDS } from "./config";
-import type { GuessResult, PonyId } from "./types";
+import type { GuessResult, PonyId, PositionalFeedback } from "./types";
 
 export class InvalidGuessError extends Error {
   constructor(message: string) {
@@ -67,4 +67,55 @@ export function evaluateGuess(secret: PonyId[], guess: PonyId[]): GuessResult {
 
 export function isWinningGuess(result: GuessResult): boolean {
   return result.exact === CODE_LENGTH;
+}
+
+/**
+ * Beginner Mode — positional feedback (PASS 1 exact, PASS 2 left-to-right).
+ * Invariant: green/yellow/pink counts match Classic exact/partial/miss.
+ */
+export function evaluateGuessPositional(
+  secret: PonyId[],
+  guess: PonyId[],
+): PositionalFeedback[] {
+  assertValidLength(secret, "Secret");
+  assertValidLength(guess, "Guess");
+
+  const result: PositionalFeedback[] = Array.from(
+    { length: CODE_LENGTH },
+    () => "pink",
+  );
+  const secretUsed = Array.from({ length: CODE_LENGTH }, () => false);
+
+  for (let i = 0; i < CODE_LENGTH; i++) {
+    if (secret[i] === guess[i]) {
+      result[i] = "green";
+      secretUsed[i] = true;
+    }
+  }
+
+  for (let i = 0; i < CODE_LENGTH; i++) {
+    if (result[i] === "green") {
+      continue;
+    }
+
+    const pony = guess[i];
+    const matchIndex = secret.findIndex(
+      (id, index) => !secretUsed[index] && id === pony,
+    );
+
+    if (matchIndex !== -1) {
+      result[i] = "yellow";
+      secretUsed[matchIndex] = true;
+    }
+  }
+
+  return result;
+}
+
+export function isWinningPositionalGuess(
+  feedback: PositionalFeedback[],
+): boolean {
+  return (
+    feedback.length === CODE_LENGTH && feedback.every((slot) => slot === "green")
+  );
 }

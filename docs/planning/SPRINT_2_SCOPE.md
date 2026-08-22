@@ -1,8 +1,8 @@
 # Sprint 2 Scope — Pony Colour Code
 
-**Status:** APPROVED — ready for implementation  
+**Status:** IN PROGRESS — Steps 1–2 accepted  
 **Last updated:** 22 August 2026  
-**Product Owner:** Approved after Beta 1 user testing
+**Product Owner:** Approved after Beta 1 user testing; Steps 1+2 accepted 22 Aug 2026
 
 ---
 
@@ -181,3 +181,22 @@ Sprint 2 **extends** Beta 1 MVP. The following v1 documents remain historical ba
 - `ARCHITECTURE_v1.0.md` — no mode configuration
 
 Do not silently rewrite v1 documents.
+
+---
+
+## Progress (22 August 2026)
+
+| Step / workstream | ID | Status | Notes |
+|-------------------|-----|--------|-------|
+| **Шаг 1 — Dual-mode mechanics** | S2-01, S2-02, S2-07 (partial) | **DONE / ACCEPTED** | `beginner` + `classic`; `evaluateGuessPositional()`; Classic unchanged; 48 tests |
+| **Шаг 2 — START / Mode Selection UX** | S2-03 | **DONE / ACCEPTED** | Mode cards, Secret/Guess example, feedback in cards, `startGame(mode)` |
+| **Шаг 3 — GAME dual-mode feedback UI** | S2-01 (UI) | **NEXT / NOT STARTED** | Positional history for Beginner; Classic aggregate unchanged |
+| Mobile GAME / P1-04 | S2-04 | **NOT STARTED** | `Удалить` / `Подтвердить` without mandatory scroll |
+| Mobile START/RESULT polish | S2-05 | **NOT STARTED** | Narrow viewport review after Step 3 |
+| Android/Capacitor readiness | S2-06 | **OUT OF SPRINT** | Constraints documented; implementation after Beta 2 |
+| Regression + expanded tests | S2-07 | **PARTIAL** | Engine/Session/mode tests done; GAME UI tests pending Step 3 |
+| Beta 2 release | S2-08 | **NOT STARTED** | Production still Beta 1 |
+
+**Current validation:** `npm run test:run` — 48/48 PASS; `npm run build` — PASS.
+
+**Production:** Beta 1 live; Beta 2 **NOT RELEASED**; no deployment in Steps 1+2 checkpoint.
