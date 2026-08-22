@@ -14,10 +14,14 @@ const START_STEPS = [
 
 type StartScreenProps = {
   onStart: (mode: GameMode) => void;
+  initialMode?: GameMode;
 };
 
-export function StartScreen({ onStart }: StartScreenProps) {
-  const [selectedMode, setSelectedMode] = useState<GameMode>(START_DEFAULT_MODE);
+export function StartScreen({
+  onStart,
+  initialMode = START_DEFAULT_MODE,
+}: StartScreenProps) {
+  const [selectedMode, setSelectedMode] = useState<GameMode>(initialMode);
 
   return (
     <main className="screen screen--start">

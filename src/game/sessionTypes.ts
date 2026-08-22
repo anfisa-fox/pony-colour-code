@@ -24,4 +24,5 @@ export type GameSessionAction =
   | { type: "ADD_PONY"; ponyId: PonyId }
   | { type: "REMOVE_LAST_PONY" }
   | { type: "SUBMIT_GUESS" }
-  | { type: "NEW_GAME" };
+  | { type: "NEW_GAME" }
+  | { type: "RETURN_TO_START" };

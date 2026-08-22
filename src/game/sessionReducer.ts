@@ -74,6 +74,17 @@ export function gameSessionReducer(
       return createPlayingState(state.gameMode);
     }
 
+    case "RETURN_TO_START": {
+      if (state.phase !== "won" && state.phase !== "lost") {
+        return state;
+      }
+
+      return {
+        ...createInitialState(),
+        gameMode: state.gameMode,
+      };
+    }
+
     case "ADD_PONY": {
       if (state.phase !== "playing") {
         return state;
@@ -156,6 +167,7 @@ export const gameSessionActions = {
     mode,
   }),
   newGame: (): GameSessionAction => ({ type: "NEW_GAME" }),
+  returnToStart: (): GameSessionAction => ({ type: "RETURN_TO_START" }),
   addPony: (ponyId: string): GameSessionAction => ({
     type: "ADD_PONY",
     ponyId,

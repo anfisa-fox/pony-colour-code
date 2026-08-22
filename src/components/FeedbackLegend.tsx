@@ -4,13 +4,41 @@ import type { GameMode } from "../game/types";
 type FeedbackLegendProps = {
   compact?: boolean;
   gameMode?: GameMode;
+  layout?: "default" | "mobile-inline";
 };
 
 export function FeedbackLegend({
   compact = false,
   gameMode = "beginner",
+  layout = "default",
 }: FeedbackLegendProps) {
   const isBeginner = gameMode === "beginner";
+
+  if (layout === "mobile-inline") {
+    return (
+      <div className="feedback-legend-inline" aria-label="Обозначения подсказок">
+        <div className="feedback-legend-inline__row">
+          <span className="feedback-legend-inline__item">
+            <FeedbackToken type="smile" size="demo" />
+            <span>{isBeginner ? "на месте" : "пони + место"}</span>
+          </span>
+          <span className="feedback-legend-inline__item">
+            <FeedbackToken type="wink" size="demo" />
+            <span>{isBeginner ? "другое место" : "место другое"}</span>
+          </span>
+          <span className="feedback-legend-inline__item">
+            <FeedbackToken type="oops" size="demo" />
+            <span>{isBeginner ? "нет" : "пони нет"}</span>
+          </span>
+        </div>
+        <p className="feedback-legend-inline__note">
+          {isBeginner
+            ? "Каждая пони — своя подсказка."
+            : "Подсказки для всей попытки."}
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="feedback-legend-block">

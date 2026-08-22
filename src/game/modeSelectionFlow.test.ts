@@ -64,4 +64,31 @@ describe("StartScreen mode selection flow", () => {
 
     expect(state.gameMode).toBe("beginner");
   });
+
+  it("RESULT return to start then play starts a fresh session in chosen mode", () => {
+    vi.spyOn(engine, "generateSecret")
+      .mockReturnValueOnce(["twilight", "rainbow", "applejack", "pinkie"])
+      .mockReturnValueOnce(["twilight", "rainbow", "applejack", "pinkie"]);
+
+    let state = gameSessionReducer(
+      createInitialState(),
+      gameSessionActions.startGame("classic"),
+    );
+
+    for (const ponyId of ["twilight", "rainbow", "applejack", "pinkie"]) {
+      state = gameSessionReducer(state, gameSessionActions.addPony(ponyId));
+    }
+    state = gameSessionReducer(state, gameSessionActions.submitGuess());
+    expect(state.phase).toBe("won");
+
+    state = gameSessionReducer(state, gameSessionActions.returnToStart());
+    expect(state.phase).toBe("start");
+    expect(state.gameMode).toBe("classic");
+
+    state = gameSessionReducer(state, gameSessionActions.startGame("beginner"));
+    expect(state.phase).toBe("playing");
+    expect(state.gameMode).toBe("beginner");
+    expect(state.history).toEqual([]);
+    expect(state.currentGuess).toEqual([]);
+  });
 });

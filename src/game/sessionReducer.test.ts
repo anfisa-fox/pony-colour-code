@@ -187,6 +187,36 @@ describe("gameSessionReducer", () => {
     expect(fresh.history).toEqual([]);
     expect(fresh.attemptsRemaining).toBe(MAX_ATTEMPTS);
   });
+
+  it("return to start from RESULT clears session and preserves gameMode", () => {
+    const won = reduce(
+      fillGuess(startPlaying("classic"), [...mockSecret]),
+      gameSessionActions.submitGuess(),
+    );
+    const atStart = reduce(won, gameSessionActions.returnToStart());
+
+    expect(atStart.phase).toBe("start");
+    expect(atStart.gameMode).toBe("classic");
+    expect(atStart.secret).toEqual([]);
+    expect(atStart.currentGuess).toEqual([]);
+    expect(atStart.history).toEqual([]);
+    expect(atStart.attemptsRemaining).toBe(MAX_ATTEMPTS);
+  });
+
+  it("return to start from lost phase clears session", () => {
+    let lost = startPlaying("beginner");
+    const losingGuess = [fluttershy, rarity, fluttershy, rarity] as PonyId[];
+    for (let i = 0; i < MAX_ATTEMPTS; i++) {
+      lost = fillGuess(lost, losingGuess);
+      lost = reduce(lost, gameSessionActions.submitGuess());
+    }
+
+    const atStart = reduce(lost, gameSessionActions.returnToStart());
+
+    expect(atStart.phase).toBe("start");
+    expect(atStart.gameMode).toBe("beginner");
+    expect(atStart.history).toEqual([]);
+  });
 });
 
 describe("gameSessionReducer game modes", () => {

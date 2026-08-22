@@ -8,7 +8,10 @@ function App() {
 
   if (state.phase === "start") {
     return (
-      <StartScreen onStart={(mode) => dispatch(actions.startGame(mode))} />
+      <StartScreen
+        initialMode={state.gameMode}
+        onStart={(mode) => dispatch(actions.startGame(mode))}
+      />
     );
   }
 
@@ -19,7 +22,7 @@ function App() {
   return (
     <ResultScreen
       state={state}
-      onNewGame={() => dispatch(actions.newGame())}
+      onNewGame={() => dispatch(actions.returnToStart())}
     />
   );
 }
