@@ -1,31 +1,31 @@
 import type { KeyboardEvent } from "react";
 
 import { FeedbackToken } from "./FeedbackToken";
-import type { FeedbackType } from "./feedbackUtils";
+import {
+  buildPositionalFeedbackSequence,
+  type FeedbackType,
+} from "./feedbackUtils";
 import { DEFAULT_GAME_MODE } from "../game/config";
 import type { GameMode } from "../game/types";
+import type { PositionalFeedback } from "../game/types";
 
-type DemoSlotFeedback = "green" | "yellow" | "pink";
-
-const SLOT_TO_TOKEN: Record<DemoSlotFeedback, FeedbackType> = {
-  green: "smile",
-  yellow: "wink",
-  pink: "oops",
-};
-
-const BEGINNER_FEEDBACK: DemoSlotFeedback[] = [
+const BEGINNER_FEEDBACK: PositionalFeedback[] = [
   "yellow",
   "yellow",
   "green",
   "pink",
 ];
 
-const CLASSIC_FEEDBACK: DemoSlotFeedback[] = [
+const CLASSIC_FEEDBACK: PositionalFeedback[] = [
   "green",
   "yellow",
   "yellow",
   "pink",
 ];
+
+function demoFeedbackTokens(feedback: PositionalFeedback[]): FeedbackType[] {
+  return buildPositionalFeedbackSequence(feedback);
+}
 
 export const START_MODE_OPTIONS = [
   {
@@ -84,10 +84,10 @@ export function ModeSelector({ selectedMode, onSelect }: ModeSelectorProps) {
           >
             <span className="mode-card__title">{mode.title}</span>
             <span className="mode-card__feedback" aria-hidden="true">
-              {mode.feedback.map((slot, index) => (
+              {demoFeedbackTokens(mode.feedback).map((tokenType, index) => (
                 <FeedbackToken
-                  key={`${mode.id}-${slot}-${index}`}
-                  type={SLOT_TO_TOKEN[slot]}
+                  key={`${mode.id}-${tokenType}-${index}`}
+                  type={tokenType}
                   size="demo"
                 />
               ))}

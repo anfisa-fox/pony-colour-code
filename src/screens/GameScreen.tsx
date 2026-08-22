@@ -57,6 +57,7 @@ export function GameScreen({ state, dispatch, actions }: GameScreenProps) {
                 key={`${index}-${record.guess.join("-")}`}
                 record={record}
                 attemptNumber={index + 1}
+                gameMode={state.gameMode}
               />
             ))}
           </ol>
@@ -102,7 +103,7 @@ export function GameScreen({ state, dispatch, actions }: GameScreenProps) {
         />
       </section>
 
-      <FeedbackLegend compact />
+      <FeedbackLegend compact gameMode={state.gameMode} />
 
       <div className="game-actions">
         <button

@@ -7,7 +7,7 @@
 
 ## Summary
 
-Beta 1 is **published** and user testing is **complete and successful**. Sprint 2 implementation is **in progress**: Steps 1 and 2 are **completed and accepted** by Product Owner. Production still serves **Beta 1** until Beta 2 is deployed.
+Beta 1 is **published** and user testing is **complete and successful**. Sprint 2 implementation is **in progress**: Steps 1–3 are **completed and accepted** by Product Owner. Production still serves **Beta 1** until Beta 2 is deployed.
 
 | Item | Value |
 |------|-------|
@@ -44,30 +44,35 @@ Beta 1 is **published** and user testing is **complete and successful**. Sprint 
 - Карточки визуально равноправны; desktop UX принят Product Owner
 - START → GAME передаёт выбранный `GameMode` через `startGame(selectedMode)`
 
+**Шаг 3 — GAME dual-mode feedback UI**  
+**Status:** COMPLETED / ACCEPTED BY PRODUCT OWNER
+
+- Beginner history: positional feedback под каждой пони (`GuessRecord.positional`; UI не пересчитывает scoring)
+- Mapping: green → smile, yellow → wink, pink → oops
+- Classic history: aggregate feedback Beta 1 сохранён
+- Presentation определяется по `state.gameMode`
+- Ручная PO-проверка Beginner (в т.ч. дубликаты) — корректно
+
 ### Current validation
 
 | Check | Result |
 |-------|--------|
-| `npm run test:run` | PASS — **48/48** |
+| `npm run test:run` | PASS — **57/57** |
 | `npm run build` | PASS |
 
 ### Next
 
-**Шаг 3 — GAME dual-mode feedback UI**
+**Mobile GAME / P1-04**
 
-Цель:
+Основная продуктовая задача следующего этапа:
 
-- Beginner → позиционная подсказка для каждой пони в истории ходов
-- Classic → существующий aggregate feedback (без изменений semantics)
-- Не смешивать две presentation semantics в одном UI
+> На мобильном устройстве основные действия GAME должны быть доступны рядом с текущей догадкой и не требовать обязательной прокрутки к нижней части страницы.
 
-### Later in Sprint 2
+### Later in Sprint 2 (before Beta 2)
 
-После Шага 3:
-
-- Mobile GAME redesign
-- Закрытие P1-04 (`Удалить` / `Подтвердить` без обязательной прокрутки)
 - Mobile START / RESULT polish
+- Beta 2 polish: START hero character orientation consistency (S2-09)
+- Beta 2 polish: RESULT → START mode-selection flow (S2-10)
 - Regression pass
 - Beta 2 preparation / release
 
@@ -78,9 +83,9 @@ Beta 1 is **published** and user testing is **complete and successful**. Sprint 
 | Item | Status |
 |------|--------|
 | Текущая production-версия | **Beta 1** (https://pony-colour-code.pages.dev/) |
-| Изменения Шагов 1+2 | Локально приняты; **ещё не Beta 2** |
+| Изменения Шагов 1–3 | Приняты локально; **ещё не Beta 2** |
 | Beta 2 | **NOT RELEASED** |
-| Deployment в рамках Шагов 1+2 | **NOT PERFORMED** |
+| Deployment в рамках Шагов 1–3 | **NOT PERFORMED** |
 
 ---
 
@@ -124,7 +129,7 @@ Beta 1 runtime remains the **immutable historical baseline**. Production still s
 ## Known limitations (Beta 1 production, until Beta 2 deploy)
 
 - «Вернуться в My World» — disabled UI placeholder
-- Production GAME показывает только Classic aggregate feedback (Beginner UI — Шаг 3)
+- Production GAME на Beta 1 показывает только Classic aggregate feedback (локально — оба режима после Шага 3)
 - Mobile GAME requires scroll to actions — **P1-04**, Sprint 2 (not yet fixed)
 - Decorative purple orb on RESULT (P2-02 deferred)
 - ~19 MB static assets; Google Fonts CDN
@@ -146,7 +151,7 @@ See [`BACKLOG.md`](BACKLOG.md) and [`planning/SPRINT_2_SCOPE.md`](planning/SPRIN
 
 ```
 Beta 1 published → user testing (complete) → Sprint 2 planning (complete)
-  → Steps 1+2 accepted → Step 3 (GAME UI) → mobile / P1-04 → Beta 2 web release
+  → Steps 1–3 accepted → Mobile GAME / P1-04 → Beta 2 polish → Beta 2 web release
 ```
 
 Historical Beta 1 freeze: [`RELEASE_BETA_1.md`](RELEASE_BETA_1.md), tag `beta-1`.

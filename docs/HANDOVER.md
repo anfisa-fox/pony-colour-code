@@ -9,7 +9,7 @@
 
 | Phase | Document |
 |-------|----------|
-| **Current: Sprint 2 Step 3** | [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) |
+| **Current: Sprint 2 — Mobile GAME / P1-04** | [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) |
 | Beginner scoring | [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) |
 | Mode selection UX | [planning/MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
 | Mobile GAME (P1-04) | [planning/MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
@@ -26,9 +26,9 @@
 | | |
 |---|---|
 | Production (live) | **Beta 1** — https://pony-colour-code.pages.dev/ |
-| Sprint 2 | **IN PROGRESS** — Steps 1+2 **accepted**; Step 3 **next** |
-| Beta 2 | **Not released**; no deployment from Steps 1+2 checkpoint |
-| Tests | **48/48** PASS (Engine, Session, mode selection flow) |
+| Sprint 2 | **IN PROGRESS** — Steps 1–3 **accepted**; **Mobile GAME / P1-04 next** |
+| Beta 2 | **Not released**; no deployment from Step 3 checkpoint |
+| Tests | **57/57** PASS (Engine, Session, mode flow, presentation) |
 
 **What Beta 1 is:** the validated, published web game (Classic mode only in GAME UI). Tag `beta-1` marks the historical project freeze; runtime baseline `6353fec`.
 
@@ -36,8 +36,11 @@
 
 - **Step 1:** dual-mode mechanics in Engine/Session (`beginner` positional, `classic` aggregate unchanged)
 - **Step 2:** START screen mode selection with shared Secret/Guess example and feedback inside mode cards
+- **Step 3:** GAME dual-mode feedback UI — Beginner positional history; Classic aggregate preserved; `state.gameMode` drives presentation
 
-**What production still shows:** Beta 1 GAME UI until Beta 2 is deployed. Beginner positional feedback in GAME history is **Step 3 — not started**.
+**What production still shows:** Beta 1 until Beta 2 deploy. Local main includes Steps 1–3 (not yet released).
+
+**Beta 2 polish (documented, not implemented):** S2-09 START hero orientation; S2-10 RESULT → START mode flow.
 
 ---
 
@@ -149,7 +152,9 @@ pony-colour-code/
 | `src/components/ModeSelector.tsx` | Beginner / Classic radio cards with feedback preview |
 | `src/components/GameExample.tsx` | Shared Secret/Guess illustration on START |
 | `src/data/characters.ts` | Russian names, colors, PNG paths, `mirrored` |
-| `src/components/feedbackUtils.ts` | exact/partial → medallion sequence (Classic) |
+| `src/components/GuessRow.tsx` | History row — Beginner positional / Classic aggregate |
+| `src/components/FeedbackLegend.tsx` | Mode-aware legend in GAME |
+| `src/components/feedbackUtils.ts` | Positional → medallion mapping; presentation helpers |
 | `src/components/MyWorldLink.tsx` | **Disabled placeholder** — P1-02 deferred |
 
 ---
@@ -166,8 +171,9 @@ npm test           # watch mode
 | `src/game/engine.test.ts` | Classic + Beginner scoring, duplicates, invariant |
 | `src/game/sessionReducer.test.ts` | Phase transitions, history, mode persistence |
 | `src/game/modeSelectionFlow.test.ts` | START → session mode wiring |
+| `src/components/feedbackPresentation.test.ts` | Presentation mode + positional mapping |
 
-**48 tests** as of Steps 1+2 checkpoint.
+**57 tests** as of Step 3 checkpoint.
 
 ---
 
@@ -224,7 +230,7 @@ Independent from My World (ADR-001). Beta 2 deploy when PO authorizes after Spri
 
 ## 12. Current backlog
 
-See [BACKLOG.md](BACKLOG.md) — S2-01…S2-03 done; S2-04+ open; P1-04 → S2-04; Android after Beta 2.
+See [BACKLOG.md](BACKLOG.md) — S2-01…S2-03, S2-07 done; S2-04 next; S2-09/S2-10 Beta 2 polish; deferred P1-02/P1-03.
 
 ---
 
@@ -236,13 +242,13 @@ Historical test plan: [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md).
 
 ---
 
-## 14. Recommended next work (Step 3+)
+## 14. Recommended next work (Mobile GAME / P1-04)
 
 1. Read [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) progress section
-2. `npm install`; `npm run test:run && npm run build` — confirm 48/48 baseline
-3. **Step 3:** GAME dual-mode feedback UI (Beginner positional in history; Classic unchanged)
-4. Mobile GAME layout (S2-04) — verify P1-04 acceptance
-5. Mobile START/RESULT polish (S2-05)
+2. `npm install`; `npm run test:run && npm run build` — confirm 57/57 baseline
+3. **Mobile GAME / P1-04:** reorder hierarchy; actions near current guess (~375 px portrait)
+4. Mobile START/RESULT polish (S2-05)
+5. Beta 2 polish: S2-09 orientation, S2-10 RESULT → START (before release)
 6. Beta 2 checklist [RELEASE_BETA_2.md](RELEASE_BETA_2.md)
 
 Do not modify Classic `evaluateGuess()` semantics.

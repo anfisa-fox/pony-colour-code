@@ -190,13 +190,15 @@ Do not silently rewrite v1 documents.
 |-------------------|-----|--------|-------|
 | **Шаг 1 — Dual-mode mechanics** | S2-01, S2-02, S2-07 (partial) | **DONE / ACCEPTED** | `beginner` + `classic`; `evaluateGuessPositional()`; Classic unchanged; 48 tests |
 | **Шаг 2 — START / Mode Selection UX** | S2-03 | **DONE / ACCEPTED** | Mode cards, Secret/Guess example, feedback in cards, `startGame(mode)` |
-| **Шаг 3 — GAME dual-mode feedback UI** | S2-01 (UI) | **NEXT / NOT STARTED** | Positional history for Beginner; Classic aggregate unchanged |
-| Mobile GAME / P1-04 | S2-04 | **NOT STARTED** | `Удалить` / `Подтвердить` without mandatory scroll |
-| Mobile START/RESULT polish | S2-05 | **NOT STARTED** | Narrow viewport review after Step 3 |
+| **Шаг 3 — GAME dual-mode feedback UI** | S2-01 (UI), S2-07 | **DONE / ACCEPTED** | Positional history Beginner; Classic aggregate; 57 tests |
+| Mobile GAME / P1-04 | S2-04 | **NEXT / NOT STARTED** | `Удалить` / `Подтвердить` without mandatory scroll |
+| Mobile START/RESULT polish | S2-05 | **NOT STARTED** | Narrow viewport review |
+| Beta 2 polish — START orientation | S2-09 | **NOT STARTED** | Hero mirror consistency with GAME |
+| Beta 2 polish — RESULT → START | S2-10 | **NOT STARTED** | Mode re-selection before new game |
 | Android/Capacitor readiness | S2-06 | **OUT OF SPRINT** | Constraints documented; implementation after Beta 2 |
-| Regression + expanded tests | S2-07 | **PARTIAL** | Engine/Session/mode tests done; GAME UI tests pending Step 3 |
+| Regression + expanded tests | S2-07 | **DONE** | Engine/Session/mode + presentation unit tests |
 | Beta 2 release | S2-08 | **NOT STARTED** | Production still Beta 1 |
 
-**Current validation:** `npm run test:run` — 48/48 PASS; `npm run build` — PASS.
+**Current validation:** `npm run test:run` — 57/57 PASS; `npm run build` — PASS.
 
-**Production:** Beta 1 live; Beta 2 **NOT RELEASED**; no deployment in Steps 1+2 checkpoint.
+**Production:** Beta 1 live; Beta 2 **NOT RELEASED**; no deployment in Step 3 checkpoint.

@@ -869,6 +869,26 @@ body {
   flex-shrink: 0;
 }
 
+.guess-row--beginner {
+  align-items: flex-start;
+}
+
+.guess-row__positional {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.guess-row__slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  flex: 0 0 auto;
+}
+
 /* ── Feedback medallions ── */
 
 .feedback-group {
@@ -956,6 +976,25 @@ body {
 
 .feedback-legend--compact .feedback-legend__item {
   font-size: 0.78rem;
+}
+
+.feedback-legend-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: var(--space-lg);
+}
+
+.feedback-legend-block .feedback-legend--compact {
+  margin-bottom: 0;
+}
+
+.feedback-legend__note {
+  margin: 0;
+  padding: 0 var(--space-sm);
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: var(--color-muted);
 }
 
 /* ── Current guess ── */
@@ -1179,6 +1218,14 @@ body {
 
   .guess-row {
     flex-wrap: wrap;
+  }
+
+  .guess-row--beginner {
+    flex-wrap: nowrap;
+  }
+
+  .guess-row--beginner .guess-row__positional {
+    gap: 0.2rem;
   }
 
   .guess-row__separator {

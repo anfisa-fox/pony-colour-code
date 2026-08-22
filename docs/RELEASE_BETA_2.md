@@ -38,7 +38,7 @@ See [SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md).
 
 ### Code and tests
 
-- [ ] `npm run test:run` — PASS (24+ tests)
+- [ ] `npm run test:run` — PASS (57+ tests)
 - [ ] `npm run build` — PASS
 - [ ] Beginner positional tests pass per [BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md)
 - [ ] Classic regression — Beta 1 scoring unchanged
@@ -53,6 +53,8 @@ See [SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md).
 - [ ] Desktop layout not regressed
 - [ ] START + RESULT usable on mobile portrait
 - [ ] Win/loss flow; new game preserves mode
+- [ ] S2-09: START hero character orientation matches GAME (mirrored row 2)
+- [ ] S2-10: RESULT → START → mode confirm → Играть → GAME
 
 ### Documentation
 

@@ -15,8 +15,8 @@ Do **not** treat duplicate characters or Classic scoring engine as defects — s
 |------|--------|
 | Шаг 1 — Dual-mode mechanics | **Done / Accepted** |
 | Шаг 2 — START / Mode Selection | **Done / Accepted** |
-| Шаг 3 — GAME dual-mode UI | **Not started** |
-| Mobile GAME / P1-04 | **Not started** |
+| Шаг 3 — GAME dual-mode UI | **Done / Accepted** |
+| Mobile GAME / P1-04 | **Next / Not started** |
 | Beta 2 release | **Not started** |
 
 ---
@@ -33,14 +33,16 @@ Do **not** treat duplicate characters or Classic scoring engine as defects — s
 
 | ID | Priority | Status | Description | Spec / acceptance |
 |----|----------|--------|-------------|-------------------|
-| S2-01 | P0 | **Done** | **Beginner Mode** — positional feedback, duplicate-safe algorithm | Engine + Session; GAME UI — Step 3 |
+| S2-01 | P0 | **Done** | **Beginner Mode** — positional feedback, duplicate-safe algorithm | Engine + Session + GAME UI (Step 3 accepted) |
 | S2-02 | P0 | **Done** | **Classic Mode regression preservation** | `evaluateGuess()` unchanged; Classic tests pass |
 | S2-03 | P0 | **Done** | **Mode Selection UX** on START — Beginner default | [MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md); PO accepted 22 Aug 2026 |
-| S2-04 | P0 | Open | **Mobile GAME UX** — resolve P1-04 | [MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
+| S2-04 | P0 | Open | **Mobile GAME UX** — resolve P1-04 | [MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) — **NEXT** |
 | S2-05 | P1 | Open | **START + RESULT mobile review** | Usable on 375px portrait; see planning docs |
 | S2-06 | P1 | Open | **Android readiness constraints** in implementation | [ANDROID_READINESS.md](planning/ANDROID_READINESS.md) — out of sprint implementation |
-| S2-07 | P0 | **Partial** | **Automated tests** for Beginner + mode session | Engine/Session/mode flow — done; GAME UI tests — Step 3 |
+| S2-07 | P0 | **Done** | **Automated tests** for Beginner + mode session + presentation | 57 tests; presentation unit tests in `feedbackPresentation.test.ts` |
 | S2-08 | P1 | Open | **Web Beta 2 release preparation** | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) checklist |
+| S2-09 | P1 | Open | **Beta 2 polish — START hero character orientation** | Pinkie / Fluttershy / Rarity mirror in hero ensemble; match GAME/example orientation |
+| S2-10 | P1 | Open | **Beta 2 polish — RESULT → START mode-selection flow** | `RESULT → START → Играть → GAME`; preserve last mode as pre-selected on START |
 
 ### P1-04 traceability (origin → Sprint 2)
 
@@ -55,6 +57,29 @@ Do **not** treat duplicate characters or Classic scoring engine as defects — s
 **Evidence:** Observed by Product Owner on https://pony-colour-code.pages.dev/
 
 **Sprint 2 resolution:** [MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) — mobile reorder hierarchy; actions usable without mandatory scroll to page bottom.
+
+#### S2-09: START hero character orientation consistency
+
+**Problem:** На START в верхнем hero/showcase все шесть персонажей визуально ориентированы одинаково. В GAME и в примере выбора режима персонажи 4–6 (Pinkie, Fluttershy, Rarity) используют предусмотренную зеркальную ориентацию (`mirrored: true`).
+
+**Target (Beta 2):** Привести START hero к той же системе ориентации для визуальной согласованности во всём приложении.
+
+**Status:** Documented; not a Step 3 blocker; verify before Beta 2 release.
+
+#### S2-10: RESULT → START mode-selection flow
+
+**Problem:** Текущий flow `RESULT → Новая партия → сразу GAME` не учитывает выбор режима после появления Beginner/Classic.
+
+**Target (Beta 2):** `RESULT → START → выбор/подтверждение режима → Играть → GAME`.
+
+**Requirements:**
+
+- Кнопка после WIN/LOSS возвращает на START
+- Последний использованный режим сохраняется выбранным на START
+- Пользователь может оставить режим и нажать «Играть», либо выбрать другой
+- Новая сессия начинается после «Играть», а не сразу после кнопки на RESULT
+
+**Status:** Documented only; runtime/Reducer/RESULT not changed in Step 3 checkpoint.
 
 ---
 

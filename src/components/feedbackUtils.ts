@@ -1,4 +1,46 @@
+import type { GameMode, PositionalFeedback } from "../game/types";
+
 export type FeedbackType = "smile" | "wink" | "oops";
+
+export type HistoryFeedbackPresentation = "positional" | "aggregate";
+
+const POSITIONAL_TO_TOKEN: Record<PositionalFeedback, FeedbackType> = {
+  green: "smile",
+  yellow: "wink",
+  pink: "oops",
+};
+
+const POSITIONAL_SLOT_LABELS: Record<PositionalFeedback, string> = {
+  green: "на месте",
+  yellow: "есть, но в другом месте",
+  pink: "нет",
+};
+
+export function getHistoryFeedbackPresentation(
+  gameMode: GameMode,
+): HistoryFeedbackPresentation {
+  return gameMode === "beginner" ? "positional" : "aggregate";
+}
+
+export function positionalToFeedbackType(
+  slot: PositionalFeedback,
+): FeedbackType {
+  return POSITIONAL_TO_TOKEN[slot];
+}
+
+export function buildPositionalFeedbackSequence(
+  positional: PositionalFeedback[],
+): FeedbackType[] {
+  return positional.map(positionalToFeedbackType);
+}
+
+export function positionalFeedbackAriaLabel(
+  positional: PositionalFeedback[],
+): string {
+  return positional
+    .map((slot, index) => `Позиция ${index + 1}: ${POSITIONAL_SLOT_LABELS[slot]}`)
+    .join("; ");
+}
 
 export function buildFeedbackSequence(
   exact: number,
