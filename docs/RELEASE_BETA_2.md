@@ -2,7 +2,7 @@
 
 **Release:** Beta 2  
 **Status:** **NOT RELEASED** — checklist template for Sprint 2  
-**Last updated:** 22 August 2026
+**Last updated:** 23 August 2026
 
 ---
 
@@ -34,27 +34,41 @@ See [SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md).
 
 ---
 
+## Implementation status (pre-release)
+
+| Area | Status |
+|------|--------|
+| Beginner + Classic modes | **Done** (Steps 1–3) |
+| Mode selection START | **Done** |
+| Mobile GAME / P1-04 | **Done / Accepted** |
+| Mobile START/RESULT (S2-05) | **Verified** (414×896, 360×780) |
+| S2-09 START hero orientation | **Done** |
+| S2-10 RESULT → START flow | **Done** |
+| Full regression + deploy | **Pending (S2-08)** |
+
+---
+
 ## Pre-release checklist
 
 ### Code and tests
 
-- [ ] `npm run test:run` — PASS (57+ tests)
-- [ ] `npm run build` — PASS
-- [ ] Beginner positional tests pass per [BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md)
-- [ ] Classic regression — Beta 1 scoring unchanged
-- [ ] No changes to Classic `evaluateGuess()` semantics
+- [x] `npm run test:run` — PASS (64 tests)
+- [x] `npm run build` — PASS
+- [x] Beginner positional tests pass per [BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md)
+- [x] Classic regression — Beta 1 scoring unchanged
+- [x] No changes to Classic `evaluateGuess()` semantics
 
 ### Functional QA
 
-- [ ] Beginner default on START; mode switch works
-- [ ] Beginner GAME shows per-slot feedback; invariant holds
-- [ ] Classic GAME matches Beta 1 behaviour
-- [ ] Mobile GAME: actions usable without mandatory bottom scroll (P1-04)
-- [ ] Desktop layout not regressed
-- [ ] START + RESULT usable on mobile portrait
-- [ ] Win/loss flow; new game preserves mode
-- [ ] S2-09: START hero character orientation matches GAME (mirrored row 2)
-- [ ] S2-10: RESULT → START → mode confirm → Играть → GAME
+- [x] Beginner default on START; mode switch works
+- [x] Beginner GAME shows per-slot feedback; invariant holds
+- [x] Classic GAME matches Beta 1 behaviour
+- [x] Mobile GAME: actions usable without mandatory bottom scroll (P1-04)
+- [ ] Desktop layout not regressed *(full regression pending)*
+- [x] START + RESULT usable on mobile portrait (S2-05)
+- [x] Win/loss flow; new game preserves mode
+- [x] S2-09: START hero character orientation matches GAME (mirrored row 2)
+- [x] S2-10: RESULT → START → mode confirm → Играть → GAME
 
 ### Documentation
 

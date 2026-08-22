@@ -34,7 +34,9 @@ export function StartScreen({
           {CHARACTERS.map((character) => (
             <li key={character.id} className="start-hero-ensemble__item">
               <img
-                className="start-hero-ensemble__figure"
+                className={`start-hero-ensemble__figure${
+                  character.mirrored ? " start-hero-ensemble__figure--mirrored" : ""
+                }`}
                 src={character.image}
                 alt=""
                 draggable={false}

@@ -184,21 +184,23 @@ Do not silently rewrite v1 documents.
 
 ---
 
-## Progress (22 August 2026)
+## Progress (23 August 2026)
 
 | Step / workstream | ID | Status | Notes |
 |-------------------|-----|--------|-------|
-| **Шаг 1 — Dual-mode mechanics** | S2-01, S2-02, S2-07 (partial) | **DONE / ACCEPTED** | `beginner` + `classic`; `evaluateGuessPositional()`; Classic unchanged; 48 tests |
-| **Шаг 2 — START / Mode Selection UX** | S2-03 | **DONE / ACCEPTED** | Mode cards, Secret/Guess example, feedback in cards, `startGame(mode)` |
-| **Шаг 3 — GAME dual-mode feedback UI** | S2-01 (UI), S2-07 | **DONE / ACCEPTED** | Positional history Beginner; Classic aggregate; 57 tests |
-| Mobile GAME / P1-04 | S2-04 | **NEXT / NOT STARTED** | `Удалить` / `Подтвердить` without mandatory scroll |
-| Mobile START/RESULT polish | S2-05 | **NOT STARTED** | Narrow viewport review |
-| Beta 2 polish — START orientation | S2-09 | **NOT STARTED** | Hero mirror consistency with GAME |
-| Beta 2 polish — RESULT → START | S2-10 | **NOT STARTED** | Mode re-selection before new game |
-| Android/Capacitor readiness | S2-06 | **OUT OF SPRINT** | Constraints documented; implementation after Beta 2 |
-| Regression + expanded tests | S2-07 | **DONE** | Engine/Session/mode + presentation unit tests |
-| Beta 2 release | S2-08 | **NOT STARTED** | Production still Beta 1 |
+| **Шаг 1 — Dual-mode mechanics** | S2-01, S2-02, S2-07 | **DONE / ACCEPTED** | Engine + Session; 64 tests |
+| **Шаг 2 — START / Mode Selection UX** | S2-03 | **DONE / ACCEPTED** | Mode cards, Secret/Guess, feedback in cards |
+| **Шаг 3 — GAME dual-mode feedback UI** | S2-01 (UI) | **DONE / ACCEPTED** | Positional Beginner; Classic aggregate |
+| **Mobile GAME / P1-04** | S2-04 | **DONE / ACCEPTED** | Flex mobile GAME; 414×896 PO accepted |
+| **Mobile START/RESULT polish** | S2-05 | **DONE / VERIFIED** | No runtime changes; 360×780 lower bound |
+| **Beta 2 polish — START orientation** | S2-09 | **DONE / ACCEPTED** | Hero mirror for Pinkie/Fluttershy/Rarity |
+| **Beta 2 polish — RESULT → START** | S2-10 | **DONE** | `returnToStart`; mode pre-selected |
+| Android/Capacitor readiness | S2-06 | **OUT OF SPRINT** | After Beta 2 |
+| Regression + expanded tests | S2-07 | **DONE** | 64 unit tests |
+| Beta 2 release | S2-08 | **NEXT / NOT STARTED** | Production still Beta 1 |
 
-**Current validation:** `npm run test:run` — 57/57 PASS; `npm run build` — PASS.
+**Mobile viewport policy (S2-05):** 414×896 primary; 360×780 accepted lower bound; 375×667 legacy stress only.
 
-**Production:** Beta 1 live; Beta 2 **NOT RELEASED**; no deployment in Step 3 checkpoint.
+**Current validation:** `npm run test:run` — 64/64 PASS; `npm run build` — PASS.
+
+**Production:** Beta 1 live; Beta 2 **NOT RELEASED**; deployment **NOT PERFORMED**.

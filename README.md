@@ -9,7 +9,7 @@
 | **Production (Beta 1)** | https://pony-colour-code.pages.dev/ |
 | **Repository** | https://github.com/anfisa-fox/pony-colour-code |
 | **Beta 1 runtime baseline** | `6353feceb2d4712697466672339842cdb0a384a1` — *Beta 1: initial playable release* |
-| **Sprint 2 progress** | Steps 1–3 **accepted**; next: Mobile GAME / P1-04 |
+| **Sprint 2 progress** | Steps 1–3, P1-04, S2-05/09/10 **accepted**; next: Beta 2 release prep (S2-08) |
 
 Beta 1 user testing is **complete and successful**. Sprint 2 adds Beginner Mode, mode selection, and mobile GAME improvements while preserving Classic (Beta 1) gameplay. **Beta 2 is not yet released** — production still serves Beta 1.
 

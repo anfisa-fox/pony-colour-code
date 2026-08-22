@@ -1,7 +1,7 @@
 # Handover — Pony Colour Code
 
 **Audience:** Developer joining with **no prior chat history**.  
-**Last updated:** 22 August 2026
+**Last updated:** 23 August 2026
 
 ---
 
@@ -9,7 +9,7 @@
 
 | Phase | Document |
 |-------|----------|
-| **Current: Sprint 2 — Mobile GAME / P1-04** | [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) |
+| **Current: Sprint 2 — Beta 2 release prep (S2-08)** | [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) |
 | Beginner scoring | [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) |
 | Mode selection UX | [planning/MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
 | Mobile GAME (P1-04) | [planning/MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
@@ -26,21 +26,21 @@
 | | |
 |---|---|
 | Production (live) | **Beta 1** — https://pony-colour-code.pages.dev/ |
-| Sprint 2 | **IN PROGRESS** — Steps 1–3 **accepted**; **Mobile GAME / P1-04 next** |
-| Beta 2 | **Not released**; no deployment from Step 3 checkpoint |
-| Tests | **57/57** PASS (Engine, Session, mode flow, presentation) |
+| Sprint 2 | **IN PROGRESS** — Steps 1–3, P1-04, S2-05/09/10 **accepted**; **S2-08 Beta 2 prep next** |
+| Beta 2 | **Not released**; deployment **not performed** |
+| Tests | **64/64** PASS (Engine, Session, mode flow, presentation, mobile/history) |
 
 **What Beta 1 is:** the validated, published web game (Classic mode only in GAME UI). Tag `beta-1` marks the historical project freeze; runtime baseline `6353fec`.
 
 **What changed in Sprint 2 so far:**
 
-- **Step 1:** dual-mode mechanics in Engine/Session (`beginner` positional, `classic` aggregate unchanged)
-- **Step 2:** START screen mode selection with shared Secret/Guess example and feedback inside mode cards
-- **Step 3:** GAME dual-mode feedback UI — Beginner positional history; Classic aggregate preserved; `state.gameMode` drives presentation
+- **Steps 1–3:** dual-mode mechanics, START mode selection, GAME dual-mode feedback UI
+- **P1-04 / S2-04:** mobile GAME flex layout; actions without mandatory page scroll (414×896 accepted)
+- **S2-05:** mobile START/RESULT verified on 414×896 and 360×780 (no runtime changes)
+- **S2-09:** START hero mirrored orientation for Pinkie / Fluttershy / Rarity (matches GAME)
+- **S2-10:** RESULT → START → mode confirm → GAME; last mode pre-selected
 
-**What production still shows:** Beta 1 until Beta 2 deploy. Local main includes Steps 1–3 (not yet released).
-
-**Beta 2 polish (documented, not implemented):** S2-09 START hero orientation; S2-10 RESULT → START mode flow.
+**What production still shows:** Beta 1 until Beta 2 deploy. Local main includes full Sprint 2 mobile polish (not yet released).
 
 ---
 
@@ -230,7 +230,7 @@ Independent from My World (ADR-001). Beta 2 deploy when PO authorizes after Spri
 
 ## 12. Current backlog
 
-See [BACKLOG.md](BACKLOG.md) — S2-01…S2-03, S2-07 done; S2-04 next; S2-09/S2-10 Beta 2 polish; deferred P1-02/P1-03.
+See [BACKLOG.md](BACKLOG.md) — S2-01…S2-07, S2-04/05/09/10 done; S2-08 Beta 2 release prep next; deferred P1-02/P1-03.
 
 ---
 
@@ -242,14 +242,13 @@ Historical test plan: [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md).
 
 ---
 
-## 14. Recommended next work (Mobile GAME / P1-04)
+## 14. Recommended next work (Beta 2 release prep — S2-08)
 
 1. Read [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) progress section
-2. `npm install`; `npm run test:run && npm run build` — confirm 57/57 baseline
-3. **Mobile GAME / P1-04:** reorder hierarchy; actions near current guess (~375 px portrait)
-4. Mobile START/RESULT polish (S2-05)
-5. Beta 2 polish: S2-09 orientation, S2-10 RESULT → START (before release)
-6. Beta 2 checklist [RELEASE_BETA_2.md](RELEASE_BETA_2.md)
+2. `npm install`; `npm run test:run && npm run build` — confirm 64/64 baseline
+3. Full regression: desktop + mobile (414×896 primary, 360×780 lower bound)
+4. [RELEASE_BETA_2.md](RELEASE_BETA_2.md) checklist + PO sign-off
+5. Deploy only after explicit PO authorization
 
 Do not modify Classic `evaluateGuess()` semantics.
 

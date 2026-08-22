@@ -175,6 +175,10 @@ body {
   object-position: center bottom;
 }
 
+.start-hero-ensemble__figure--mirrored {
+  transform: scaleX(-1);
+}
+
 .start-hero-ensemble__name {
   font-size: 0.72rem;
   font-weight: 600;
