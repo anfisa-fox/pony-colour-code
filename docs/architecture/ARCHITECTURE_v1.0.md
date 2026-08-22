@@ -1,8 +1,10 @@
 # Pony Colour Code — Architecture
 
-**Status:** Draft  
+**Status:** Historical — Beta 1 architecture baseline  
 **Version:** 0.1  
 **Last Updated:** 10 августа 2026
+
+> **Supersession (22 Aug 2026):** Layering (Engine / Session / UI) and deployment model remain valid. Sprint 2 adds **dual game mode** and mobile layout changes — see [SPRINT_2_SCOPE.md](../planning/SPRINT_2_SCOPE.md) and [ANDROID_READINESS.md](../planning/ANDROID_READINESS.md). §5 «no mode configuration» applied to Beta 1 MVP only.
 
 ---
 

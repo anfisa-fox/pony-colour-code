@@ -1,61 +1,79 @@
 # Backlog — Pony Colour Code
 
-**Source of truth** for open work after Beta 1 freeze.  
-**Last updated:** 10 August 2026
+**Source of truth** for open work.  
+**Last updated:** 22 August 2026
 
-Do **not** treat duplicate characters or scoring engine as defects — see [HANDOVER.md](HANDOVER.md) invariants.
+Do **not** treat duplicate characters or Classic scoring engine as defects — see [HANDOVER.md](HANDOVER.md) invariants.
+
+**Sprint 2 entry point:** [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md)
 
 ---
 
-## P1 — After Beta 1 testing (high priority)
+## Beta 1 — completed
 
-| ID | Priority | Status | Description | Acceptance / evidence |
-|----|----------|--------|-------------|------------------------|
-| P1-01 | P1 | Open | Real child Beta 1 playtest | Completed session(s) using [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md); observations recorded; PO review |
-| P1-02 | P1 | Open | Enable Pony Colour Code → My World navigation | `MyWorldLink` becomes working `<a href>` to My World production URL; accessible label; no broken link |
-| P1-03 | P1 | Open | Add My World → Pony Colour Code entry point | Link in My World nav or home to `https://pony-colour-code.pages.dev/`; independent deploy preserved (ADR-001) |
-| P1-04 | P1 | **CONFIRMED** — observed on production / real mobile device | **Mobile GAME controls require scrolling** | See [P1-04 detail](#p1-04-mobile-game-controls-require-scrolling) below |
+| ID | Priority | Status | Description | Outcome |
+|----|----------|--------|-------------|---------|
+| P1-01 | P1 | **Done** | Real child Beta 1 playtest | **Complete and successful.** Game concept validated; playable and enjoyable; no critical defects. UX improvements captured for Sprint 2. PO approved 22 Aug 2026. |
 
-### P1-04: Mobile GAME controls require scrolling
+---
 
-**Problem:** On a real mobile device the GAME screen is functional, but the primary controls `Удалить` and `Подтвердить` are positioned below the Character Palette. After selecting characters, the player must scroll down to perform the main action of the turn. This creates unnecessary repeated scrolling in the core mobile gameplay loop.
+## Sprint 2 — in scope (approved, not yet implemented)
 
-**Goal:** Primary GAME actions should be available without mandatory downward scrolling after character selection.
+| ID | Priority | Status | Description | Spec / acceptance |
+|----|----------|--------|-------------|-------------------|
+| S2-01 | P0 | Open | **Beginner Mode** — positional feedback, duplicate-safe algorithm | [BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md); invariant with Classic |
+| S2-02 | P0 | Open | **Classic Mode regression preservation** | Beta 1 `evaluateGuess()` unchanged; 24+ tests pass |
+| S2-03 | P0 | Open | **Mode Selection UX** on START — Beginner default/recommended | [MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
+| S2-04 | P0 | Open | **Mobile GAME UX** — resolve P1-04 | [MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
+| S2-05 | P1 | Open | **START + RESULT mobile review** | Usable on 375px portrait; see planning docs |
+| S2-06 | P1 | Open | **Android readiness constraints** in implementation | [ANDROID_READINESS.md](planning/ANDROID_READINESS.md) |
+| S2-07 | P0 | Open | **Automated tests** for Beginner + mode session | ≥12 Beginner engine tests; Classic regression |
+| S2-08 | P1 | Open | **Web Beta 2 release preparation** | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) checklist |
 
-**Design directions to evaluate later (do not implement now):**
+### P1-04 traceability (origin → Sprint 2)
 
-- **A.** Move mobile controls closer to Current Guess / above Character Palette
-- **B.** Introduce an appropriate sticky action area
+| ID | Priority | Status | Description | Sprint 2 mapping |
+|----|----------|--------|-------------|------------------|
+| P1-04 | P1 | **CONFIRMED** → **Sprint 2** | Mobile GAME controls require scrolling | Addressed by **S2-04**. Original Beta 1 observation preserved below. |
 
-Desktop layout should not be changed merely to solve the mobile issue. Mobile browser chrome and safe-area behaviour must be considered.
+#### P1-04: Mobile GAME controls require scrolling (historical observation)
 
-**Acceptance criteria (future implementation):**
+**Problem (Beta 1 production):** On a real mobile device the primary controls `Удалить` and `Подтвердить` are positioned below the Character Palette. After selecting characters, the player must scroll down each turn.
 
-On a typical supported mobile viewport, after selecting characters, the player can remove the latest selection and confirm a completed guess **without mandatory additional scrolling** down the page. Controls must remain visible/usable and must not be obscured by mobile browser chrome or safe areas.
+**Evidence:** Observed by Product Owner on https://pony-colour-code.pages.dev/
 
-**Evidence:** Observed by Product Owner on published Beta 1 production build using a real mobile browser. Production URL: https://pony-colour-code.pages.dev/
+**Sprint 2 resolution:** [MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) — mobile reorder hierarchy; actions usable without mandatory scroll to page bottom.
+
+---
+
+## Deferred (not Sprint 2)
+
+| ID | Priority | Status | Description | Notes |
+|----|----------|--------|-------------|-------|
+| P1-02 | P1 | Deferred | Pony Colour Code → My World navigation | Out of Sprint 2 scope |
+| P1-03 | P1 | Deferred | My World → Pony Colour Code entry point | Out of Sprint 2 scope; requires `my-world` repo |
 
 ---
 
 ## P2 — UX / product clarity
 
-| ID | Priority | Status | Description | Acceptance / evidence |
-|----|----------|--------|-------------|------------------------|
-| P2-01 | P2 | Open | Validate feedback mechanics understandability | Beta observations show child understands exact/partial/miss without adult explanation |
-| P2-02 | P2 | Open | Resolve / remove / redesign decorative purple RESULT orb | PO decision after beta; visual pass only; no gameplay change |
+| ID | Priority | Status | Description | Notes |
+|----|----------|--------|-------------|-------|
+| P2-01 | P2 | **Informing Sprint 2** | Validate feedback mechanics understandability | Beta outcome: Beginner Mode addresses learning curve; close after Beta 2 PO review |
+| P2-02 | P2 | Deferred | Resolve / remove / redesign decorative purple RESULT orb | Out of Sprint 2 scope |
 
 ---
 
 ## P3 — Quality, performance, polish
 
-| ID | Priority | Status | Description | Acceptance / evidence |
-|----|----------|--------|-------------|------------------------|
-| P3-01 | P3 | Open | Extend scoring regression / property test coverage | Invariants A–H from pre-freeze diagnostic encoded as automated tests |
-| P3-02 | P3 | Open | Duplicate-heavy multi-attempt scenario regression | Test reproducing observed 4-attempt PO scenario; asserts consistent secret exists |
-| P3-03 | P3 | Open | `feedbackUtils` / session round-trip tests | Unit tests for `buildFeedbackSequence`, aria labels, history storage |
-| P3-04 | P3 | Open | Optimize static character assets | Deploy size reduced; visual quality acceptable to PO; no PNG edits without approval |
-| P3-05 | P3 | Open | Consider Google Fonts self-hosting | Fonts work offline / without Google CDN; Cyrillic preserved |
-| P3-06 | P3 | Open | Verify START layout on real narrow devices (~421–480 px) | No overflow/overlap on tested devices; PO sign-off |
+| ID | Priority | Status | Description | Notes |
+|----|----------|--------|-------------|-------|
+| P3-01 | P3 | Partial → S2-07 | Extend scoring regression / property test coverage | Beginner invariant tests in S2-07 |
+| P3-02 | P3 | Open | Duplicate-heavy multi-attempt scenario regression | Consider in S2-07 |
+| P3-03 | P3 | Open | `feedbackUtils` / session round-trip tests | Consider in S2-07 |
+| P3-04 | P3 | Deferred | Optimize static character assets | Out of Sprint 2 unless required |
+| P3-05 | P3 | Deferred | Google Fonts self-hosting | Out of Sprint 2 unless required |
+| P3-06 | P3 | Partial → S2-05 | Verify START layout on real narrow devices (~421–480 px) | Address in START mobile review |
 
 ---
 
@@ -64,14 +82,14 @@ On a typical supported mobile viewport, after selecting characters, the player c
 | Topic | Reason |
 |-------|--------|
 | Duplicate characters in secret/guess | Allowed by game rules (`ALLOW_DUPLICATES = true`) |
-| Scoring engine correctness | Exhaustive validation found no bug; re-verify before any Engine change |
+| Classic scoring engine correctness (Beta 1) | Validated pre-freeze; Beginner adds new function, Classic unchanged |
 | My World monorepo / shared build | Rejected in ADR-001 |
+| Capacitor / Android native (Sprint 2) | Future phase — constraints only in [ANDROID_READINESS.md](planning/ANDROID_READINESS.md) |
 
 ---
 
 ## How to add items
 
-1. Record observation in Beta test log (see BETA_TEST_PLAN.md)  
-2. Product Owner decides: backlog / won't fix / defer  
-3. Add row here with ID, priority, acceptance criteria  
-4. Do **not** implement during user testing freeze without PO approval
+1. Product Owner decides priority and sprint assignment  
+2. Add row with ID, acceptance criteria, spec link  
+3. Update [SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) if scope changes require PO approval

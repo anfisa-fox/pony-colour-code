@@ -1,9 +1,11 @@
 # MVP Contract
 
-**Status:** Draft  
+**Status:** Historical — Beta 1 MVP baseline  
 **Version:** 0.2  
 **Owner:** Project Owner  
 **Last Updated:** 10 августа 2026
+
+> **Supersession (22 Aug 2026):** This contract defines the **Beta 1 single-mode MVP**, which was implemented and validated. Sprint 2 dual-mode scope (Beginner + Classic) is defined in [SPRINT_2_SCOPE.md](./SPRINT_2_SCOPE.md). Do not rewrite this document — it remains the Beta 1 historical record.
 
 ---
 

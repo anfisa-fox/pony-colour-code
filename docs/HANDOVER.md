@@ -1,31 +1,50 @@
 # Handover — Pony Colour Code
 
 **Audience:** Developer joining with **no prior chat history**.  
-**Last updated:** 10 August 2026
+**Last updated:** 22 August 2026
+
+---
+
+## 0. Sprint 2 — start here
+
+| Phase | Document |
+|-------|----------|
+| **Current: Sprint 2 implementation** | [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) |
+| Beginner scoring | [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) |
+| Mode selection UX | [planning/MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
+| Mobile GAME (P1-04) | [planning/MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
+| Android constraints | [planning/ANDROID_READINESS.md](planning/ANDROID_READINESS.md) |
+| Status | [PROJECT_STATUS.md](PROJECT_STATUS.md) |
+| Tasks | [BACKLOG.md](BACKLOG.md) |
+
+**Beta 1** remains the historical runtime baseline. Do not rewrite Beta 1 history.
 
 ---
 
 ## 1. Product purpose
 
-**Pony Colour Code** is a family browser game: guess a hidden 4-pony code using Mastermind-style feedback. Target user: child in a family creative-world context. Thematic tie to **My World** (separate site); Beta 1 is **standalone** at https://pony-colour-code.pages.dev/
+**Pony Colour Code** is a family browser game: guess a hidden 4-pony code using Mastermind-style feedback. Target user: child in a family creative-world context. Thematic tie to **My World** (separate site); production Beta 1 at https://pony-colour-code.pages.dev/
 
 ---
 
-## 2. Current release
+## 2. Current release state
 
 | | |
 |---|---|
-| Release | **Beta 1** |
-| Status | Published, frozen for user testing |
-| Runtime baseline | `6353feceb2d4712697466672339842cdb0a384a1` |
-| Production | https://pony-colour-code.pages.dev/ |
-| Repo | https://github.com/anfisa-fox/pony-colour-code |
+| Production (live) | **Beta 1** — https://pony-colour-code.pages.dev/ |
+| Beta 1 runtime baseline | `6353feceb2d4712697466672339842cdb0a384a1` |
+| Beta 1 tag | `beta-1` (historical) |
+| User testing | **Complete and successful** (22 Aug 2026) |
+| Next release | **Beta 2** (Sprint 2 web) — not yet released |
+| Implementation | Ready when PO authorizes — see Sprint 2 docs above |
 
-See [RELEASE_BETA_1.md](RELEASE_BETA_1.md) and [PROJECT_STATUS.md](PROJECT_STATUS.md).
+See [RELEASE_BETA_1.md](RELEASE_BETA_1.md), [RELEASE_BETA_2.md](RELEASE_BETA_2.md), [PROJECT_STATUS.md](PROJECT_STATUS.md).
 
 ---
 
-## 3. Game rules & invariants (DO NOT BREAK without PO approval)
+## 3. Game rules & invariants
+
+### Beta 1 / Classic Mode (DO NOT BREAK)
 
 | Rule | Value |
 |------|-------|
@@ -40,11 +59,16 @@ See [RELEASE_BETA_1.md](RELEASE_BETA_1.md) and [PROJECT_STATUS.md](PROJECT_STATU
 | Win | 4 exact |
 | Loss | 10 attempts without win |
 | Flow | START → GAME → RESULT → new game |
+| Feedback (Classic) | **Aggregate** — tokens ≠ positions |
 
 **Duplicates are not bugs.**  
-**Scoring was exhaustively validated** pre-freeze — re-run diagnostic before changing Engine.
+Classic `evaluateGuess()` was exhaustively validated pre-freeze — do **not** modify without PO approval and full regression.
 
 Implementation: `src/game/engine.ts` → `evaluateGuess()`.
+
+### Sprint 2 / Beginner Mode (new — see spec)
+
+Positional GREEN / YELLOW / PINK per slot. Algorithm and Classic invariant: [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md).
 
 ---
 
@@ -60,8 +84,9 @@ Implementation: `src/game/engine.ts` → `evaluateGuess()`.
 ┌──────────────▼──────────────────────────┐
 │  Session (useReducer)                   │
 │  sessionReducer.ts — phase, history     │
+│  + gameMode (Sprint 2)                  │
 └──────────────┬──────────────────────────┘
-               │ evaluateGuess, generateSecret
+               │ evaluateGuess, evaluateGuessPositional, generateSecret
 ┌──────────────▼──────────────────────────┐
 │  Engine (pure TS, no React/DOM)         │
 │  engine.ts — scoring, secret generation │
@@ -76,27 +101,32 @@ Implementation: `src/game/engine.ts` → `evaluateGuess()`.
 
 App routing: **state machine in `App.tsx`** (no React Router).
 
+Sprint 2 extends architecture with dual mode — see planning docs; [ARCHITECTURE_v1.0.md](architecture/ARCHITECTURE_v1.0.md) remains Beta 1 baseline.
+
 ---
 
 ## 5. Repository structure
 
 ```
 pony-colour-code/
-├── README.md                 ← entry point
-├── docs/                     ← project docs (this file, status, backlog, release)
+├── README.md
+├── docs/
+│   ├── planning/           ← Sprint 2 specs (SPRINT_2_SCOPE, etc.)
+│   ├── architecture/       ← v1 + ADR-001
+│   ├── ux/                 ← UI spec v1 (Beta 1 baseline)
+│   └── vision/
 ├── public/
-│   ├── characters/           ← 6 production PNG
-│   └── feedback/             ← 3 feedback PNG
+│   ├── characters/
+│   └── feedback/
 ├── src/
-│   ├── game/                 ← Engine + Session + tests
-│   ├── screens/              ← START, GAME, RESULT
-│   ├── components/           ← UI building blocks
-│   ├── data/characters.ts    ← names, colors, images, mirror flags
-│   └── styles/               ← global.css, game.css
+│   ├── game/
+│   ├── screens/
+│   ├── components/
+│   ├── data/characters.ts
+│   └── styles/
 ├── index.html
 ├── vite.config.ts
-├── package.json
-└── tsconfig*.json
+└── package.json
 ```
 
 ---
@@ -106,11 +136,11 @@ pony-colour-code/
 | File | Role |
 |------|------|
 | `src/game/config.ts` | `CODE_LENGTH=4`, `MAX_ATTEMPTS=10`, `ALLOW_DUPLICATES`, pony IDs |
-| `src/game/engine.ts` | `generateSecret`, `evaluateGuess`, `isWinningGuess` |
+| `src/game/engine.ts` | `generateSecret`, `evaluateGuess`, `isWinningGuess` (+ `evaluateGuessPositional` Sprint 2) |
 | `src/game/sessionReducer.ts` | Phases: start / playing / won / lost |
 | `src/data/characters.ts` | Russian names, colors, PNG paths, `mirrored` |
-| `src/components/feedbackUtils.ts` | exact/partial → medallion sequence |
-| `src/components/MyWorldLink.tsx` | **Disabled placeholder** in Beta 1 |
+| `src/components/feedbackUtils.ts` | exact/partial → medallion sequence (Classic) |
+| `src/components/MyWorldLink.tsx` | **Disabled placeholder** — P1-02 deferred |
 
 ---
 
@@ -123,10 +153,10 @@ npm test           # watch mode
 
 | File | Coverage |
 |------|----------|
-| `src/game/engine.test.ts` | Scoring, duplicates, win detection, validation |
+| `src/game/engine.test.ts` | Classic scoring, duplicates, win detection |
 | `src/game/sessionReducer.test.ts` | Phase transitions, history, attempt limits |
 
-**Gaps (backlog P3):** property tests, multi-attempt scenarios, feedbackUtils tests.
+Sprint 2 adds Beginner positional tests — see [BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) §7.
 
 ---
 
@@ -134,13 +164,13 @@ npm test           # watch mode
 
 ```bash
 npm install
-npm run dev        # http://localhost:5173 (Vite default)
+npm run dev        # http://localhost:5173
 npm run test:run
 npm run build      # → dist/
 npm run preview
 ```
 
-No `.env` required for local run.
+No `.env` required.
 
 ---
 
@@ -155,18 +185,16 @@ No `.env` required for local run.
 | Output | `dist/` |
 | URL | https://pony-colour-code.pages.dev/ |
 
-**Independent** from My World deploy (ADR-001). Push to `main` triggers Cloudflare build.
+Independent from My World (ADR-001). Beta 2 deploy when PO authorizes post-implementation.
 
 ---
 
 ## 10. My World relationship
 
 - **Separate** GitHub repo and Cloudflare project
-- Integration = **HTML links only** (no shared code, iframe, monorepo)
-- Beta 1: **no working cross-links** (backlog P1-02, P1-03)
-- My World repo: `github.com/anfisa-fox/my-world` — **do not modify** during Beta 1 freeze
-
-See [architecture/ADR-001-project-boundaries.md](architecture/ADR-001-project-boundaries.md).
+- Integration = **HTML links only** (ADR-001)
+- **Not in Sprint 2 scope:** P1-02, P1-03
+- My World repo: `github.com/anfisa-fox/my-world` — do not modify for Sprint 2
 
 ---
 
@@ -177,37 +205,37 @@ See [architecture/ADR-001-project-boundaries.md](architecture/ADR-001-project-bo
 | Separate deployment from My World | ADR-001 |
 | Vite SPA, not Next.js | ARCHITECTURE_v1.0 |
 | Fixed MVP rules (4/6/10/duplicates) | MVP_CONTRACT_v1.0 |
-| UX screens & sections | UI_SPECIFICATION_v1.0 |
+| UX screens & sections (Beta 1) | UI_SPECIFICATION_v1.0 |
+| Dual mode + mobile (Sprint 2) | planning/SPRINT_2_SCOPE.md |
 | Product goals | PRODUCT_VISION.md |
 
 ---
 
 ## 12. Current backlog
 
-See [BACKLOG.md](BACKLOG.md) — P1 integration + beta test, P2 UX, P3 quality.
+See [BACKLOG.md](BACKLOG.md) — Sprint 2 items S2-01…S2-08; deferred P1-02/P1-03; P2/P3 polish.
 
 ---
 
-## 13. Beta testing phase
+## 13. Beta 1 testing (completed)
 
-1. Child plays on **production URL**
-2. Observer uses [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md)
-3. PO reviews observations
-4. Update BACKLOG; **then** plan Beta 2 / integration work
+Beta 1 user testing is **complete and successful**. Observations informed Sprint 2 scope (Beginner Mode, mobile GAME, mode selection).
 
-**Do not** fix backlog items during freeze without PO approval.
+Historical test plan: [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md).
 
 ---
 
-## 14. Recommended restart after freeze
+## 14. Recommended start for Sprint 2 implementation
 
-1. Read [PROJECT_STATUS.md](PROJECT_STATUS.md) and [BACKLOG.md](BACKLOG.md)
-2. Clone repo; `npm install`; `npm run test:run && npm run build`
-3. Confirm production matches runtime baseline commit (see RELEASE_BETA_1.md)
-4. Review Beta test observations with PO
-5. Prioritize P1 items (playtest results, My World links)
-6. Only touch Engine/Session after re-running tests and PO sign-off on rule changes
-7. Deploy via push to `main` (Cloudflare auto-build)
+1. Read [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) and linked specs
+2. `npm install`; `npm run test:run && npm run build` — confirm 24/24 baseline
+3. Implement Beginner engine + tests first (S2-01, S2-07)
+4. Mode selection + session (S2-03)
+5. Mobile GAME layout (S2-04) — verify P1-04 acceptance
+6. Classic regression pass (S2-02)
+7. Beta 2 checklist [RELEASE_BETA_2.md](RELEASE_BETA_2.md)
+
+Do not modify Classic `evaluateGuess()` semantics.
 
 ---
 
@@ -215,12 +243,12 @@ See [BACKLOG.md](BACKLOG.md) — P1 integration + beta test, P2 UX, P3 quality.
 
 | Artifact | Classification | Notes |
 |----------|----------------|-------|
-| `docs/vision/PRODUCT_VISION.md` | CURRENT (vision) | Product direction |
-| `docs/planning/MVP_CONTRACT_v1.0.md` | CURRENT (rules scope) | Status "Draft" in file — rules implemented in Beta 1 |
-| `docs/architecture/ARCHITECTURE_v1.0.md` | CURRENT | Technical architecture v1 |
-| `docs/architecture/ADR-001-project-boundaries.md` | CURRENT | Accepted |
-| `docs/ux/UI_SPECIFICATION_v1.0.md` | CURRENT | UX spec for implemented screens |
-| `mlp_codecracker_concept.html` | HISTORICAL | Early HTML concept prototype |
-| `PonyColourCode_BizVision_v1.0.docx` | HISTORICAL | Business vision document |
+| `docs/planning/MVP_CONTRACT_v1.0.md` | **HISTORICAL (Beta 1 MVP)** | Single-mode scope; superseded for Sprint 2 by planning package |
+| `docs/ux/UI_SPECIFICATION_v1.0.md` | **HISTORICAL (Beta 1 UX)** | Aggregate feedback; Classic baseline |
+| `docs/architecture/ARCHITECTURE_v1.0.md` | **HISTORICAL (Beta 1 arch)** | No mode system; still valid for layering |
+| `docs/architecture/ADR-001-project-boundaries.md` | **CURRENT** | Accepted |
+| `docs/vision/PRODUCT_VISION.md` | **CURRENT (vision)** | Long-term direction; Sprint 2 uses Beginner/Classic naming |
+| `docs/RELEASE_BETA_1.md` | **HISTORICAL** | Beta 1 release record |
+| `mlp_codecracker_concept.html` | **HISTORICAL** | Early prototype |
 
 Do not delete historical files without PO approval.

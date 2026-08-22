@@ -1,8 +1,10 @@
 # Pony Colour Code — UI Specification
 
-**Status:** Draft  
+**Status:** Historical — Beta 1 UX baseline (Classic aggregate feedback)  
 **Version:** 0.1  
 **Date:** 10 августа 2026
+
+> **Supersession (22 Aug 2026):** This spec describes **Beta 1 Classic Mode UI** (aggregate feedback, no mode selection). Sprint 2 additions — Beginner positional feedback, mode selection on START, mobile GAME layout — are specified in [SPRINT_2_SCOPE.md](../planning/SPRINT_2_SCOPE.md), [BEGINNER_MODE_SPEC.md](../planning/BEGINNER_MODE_SPEC.md), [MODE_SELECTION_UX.md](../planning/MODE_SELECTION_UX.md), and [MOBILE_GAME_UX_SPRINT_2.md](../planning/MOBILE_GAME_UX_SPRINT_2.md). Classic Mode in Beta 2 continues to follow §7 of this document.
 
 ---
 

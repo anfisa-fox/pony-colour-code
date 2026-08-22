@@ -2,6 +2,8 @@
 
 > **Draft** · v0.1 · Август 2026
 
+> **Note (22 Aug 2026):** Long-term vision references modes such as «Школа дружбы» and «Кантерлот». **Sprint 2** implements **Beginner** and **Classic** as approved PO naming — see [SPRINT_2_SCOPE.md](../planning/SPRINT_2_SCOPE.md). This vision document is not rewritten; Sprint 2 specs take precedence for near-term delivery.
+
 ---
 
 ## Назначение проекта

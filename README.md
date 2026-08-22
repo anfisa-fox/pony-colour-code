@@ -2,15 +2,18 @@
 
 Браузерная игра «угадай код» в духе Mastermind с персонажами G4 Mane 6. Часть семейного проекта **My World**, опубликована как **отдельное standalone-приложение**.
 
-## Status: Beta 1 — Published
+## Status: Sprint 2 — Ready for implementation
 
 | | |
 |---|---|
-| **Production** | https://pony-colour-code.pages.dev/ |
+| **Production (Beta 1)** | https://pony-colour-code.pages.dev/ |
 | **Repository** | https://github.com/anfisa-fox/pony-colour-code |
-| **Runtime baseline** | `6353feceb2d4712697466672339842cdb0a384a1` — *Beta 1: initial playable release* |
+| **Beta 1 runtime baseline** | `6353feceb2d4712697466672339842cdb0a384a1` — *Beta 1: initial playable release* |
+| **Current phase** | Sprint 2 planning complete — implementation authorized separately |
 
-> Текущая фаза: **real user Beta 1 testing**. Runtime и UX заморожены до решения Product Owner после тестирования.
+Beta 1 user testing is **complete and successful**. Sprint 2 adds Beginner Mode, mode selection, and mobile GAME improvements while preserving Classic (Beta 1) gameplay.
+
+> **Sprint 2 entry point:** [`docs/planning/SPRINT_2_SCOPE.md`](docs/planning/SPRINT_2_SCOPE.md)
 
 ## Stack
 
@@ -33,26 +36,33 @@ npm run preview    # serve dist/ locally
 
 - Secret code: **4 positions**, **6 characters**, **duplicates allowed**
 - **10 attempts** per game
-- Feedback (Mastermind): **exact** (character + position), **partial** (character, wrong position), **miss**
+- **Classic Mode (Beta 1):** aggregate Mastermind feedback (exact / partial / miss)
+- **Beginner Mode (Sprint 2):** positional feedback per pony — see planning docs
 - Flow: **START → GAME → RESULT** (win or loss) → new game
 
-Full rules and invariants: [`docs/HANDOVER.md`](docs/HANDOVER.md)
+Full Beta 1 rules and invariants: [`docs/HANDOVER.md`](docs/HANDOVER.md)
 
 ## Documentation
 
 | Document | Purpose |
 |----------|---------|
-| [`docs/HANDOVER.md`](docs/HANDOVER.md) | **Start here** — full handover for a new team |
-| [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) | Beta 1 freeze status |
-| [`docs/RELEASE_BETA_1.md`](docs/RELEASE_BETA_1.md) | Release snapshot |
-| [`docs/BACKLOG.md`](docs/BACKLOG.md) | Open tasks after Beta 1 |
-| [`docs/BETA_TEST_PLAN.md`](docs/BETA_TEST_PLAN.md) | User testing observation plan |
-| [`docs/architecture/ARCHITECTURE_v1.0.md`](docs/architecture/ARCHITECTURE_v1.0.md) | Architecture |
+| [`docs/planning/SPRINT_2_SCOPE.md`](docs/planning/SPRINT_2_SCOPE.md) | **Sprint 2 start here** — scope, DoD, acceptance |
+| [`docs/HANDOVER.md`](docs/HANDOVER.md) | Full handover for a new team |
+| [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) | Current project status |
+| [`docs/BACKLOG.md`](docs/BACKLOG.md) | Open tasks |
+| [`docs/RELEASE_BETA_1.md`](docs/RELEASE_BETA_1.md) | Beta 1 release snapshot (historical) |
+| [`docs/RELEASE_BETA_2.md`](docs/RELEASE_BETA_2.md) | Beta 2 checklist (not released) |
+| [`docs/planning/BEGINNER_MODE_SPEC.md`](docs/planning/BEGINNER_MODE_SPEC.md) | Beginner scoring algorithm |
+| [`docs/planning/MODE_SELECTION_UX.md`](docs/planning/MODE_SELECTION_UX.md) | START mode selection UX |
+| [`docs/planning/MOBILE_GAME_UX_SPRINT_2.md`](docs/planning/MOBILE_GAME_UX_SPRINT_2.md) | Mobile GAME / P1-04 |
+| [`docs/planning/ANDROID_READINESS.md`](docs/planning/ANDROID_READINESS.md) | Future Capacitor constraints |
+| [`docs/BETA_TEST_PLAN.md`](docs/BETA_TEST_PLAN.md) | Beta 1 test plan (completed) |
+| [`docs/architecture/ARCHITECTURE_v1.0.md`](docs/architecture/ARCHITECTURE_v1.0.md) | Architecture v1 (Beta 1 baseline) |
 | [`docs/architecture/ADR-001-project-boundaries.md`](docs/architecture/ADR-001-project-boundaries.md) | My World boundaries |
-| [`docs/planning/MVP_CONTRACT_v1.0.md`](docs/planning/MVP_CONTRACT_v1.0.md) | MVP scope & rules |
-| [`docs/ux/UI_SPECIFICATION_v1.0.md`](docs/ux/UI_SPECIFICATION_v1.0.md) | UX specification |
+| [`docs/planning/MVP_CONTRACT_v1.0.md`](docs/planning/MVP_CONTRACT_v1.0.md) | MVP scope (Beta 1 historical) |
+| [`docs/ux/UI_SPECIFICATION_v1.0.md`](docs/ux/UI_SPECIFICATION_v1.0.md) | UX spec v1 (Beta 1 baseline) |
 | [`docs/vision/PRODUCT_VISION.md`](docs/vision/PRODUCT_VISION.md) | Product vision |
 
 ## My World
 
-Independent deployment unit. Navigation My World ↔ game is **planned** (backlog P1) but **not wired** in Beta 1. See ADR-001.
+Independent deployment unit. Navigation My World ↔ game is **planned** (backlog P1-02/P1-03) but **not in Sprint 2 scope**. See ADR-001.
