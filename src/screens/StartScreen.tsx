@@ -74,7 +74,7 @@ export function StartScreen({
       <div className="screen__actions start-actions">
         <button
           type="button"
-          className="how-to-play-trigger"
+          className="button button--secondary"
           onClick={() => setHowToPlayOpen(true)}
         >
           Как играть?

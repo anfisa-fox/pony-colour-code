@@ -1,7 +1,6 @@
 import { useEffect, useId, useRef } from "react";
 
 import { CharacterToken } from "./CharacterToken";
-import { FeedbackGroup } from "./FeedbackGroup";
 import { FeedbackToken } from "./FeedbackToken";
 import {
   HOW_TO_PLAY_BEGINNER_ATTEMPTS,
@@ -10,7 +9,11 @@ import {
   type HowToPlayAttempt,
 } from "../data/howToPlayExamples";
 import { getCharacter } from "../data/characters";
-import { positionalToFeedbackType } from "./feedbackUtils";
+import {
+  buildFeedbackSequence,
+  feedbackGroupAriaLabel,
+  positionalToFeedbackType,
+} from "./feedbackUtils";
 
 type HowToPlayDialogProps = {
   open: boolean;
@@ -62,6 +65,7 @@ function BeginnerAttemptRow({
         {attempt.guess.map((ponyId, index) => (
           <div key={`${attemptNumber}-${index}`} className="how-to-play__beginner-slot">
             <CharacterToken ponyId={ponyId} context="history" />
+            <span className="how-to-play__connector" aria-hidden="true" />
             <FeedbackToken
               type={positionalToFeedbackType(attempt.positional[index])}
               size="demo"
@@ -80,20 +84,51 @@ function ClassicAttemptRow({
   attemptNumber: number;
   attempt: HowToPlayAttempt;
 }) {
+  const tokens = buildFeedbackSequence(attempt.exact, attempt.partial);
+
   return (
     <li className="how-to-play__attempt how-to-play__attempt--classic">
       <span className="how-to-play__attempt-number">{attemptNumber}</span>
-      <div className="how-to-play__classic-guess">
-        {attempt.guess.map((ponyId, index) => (
-          <CharacterToken
-            key={`${attemptNumber}-${index}-${ponyId}`}
-            ponyId={ponyId}
-            context="history"
-          />
-        ))}
+      <div className="how-to-play__classic-row">
+        <div className="how-to-play__classic-guess">
+          {attempt.guess.map((ponyId, index) => (
+            <CharacterToken
+              key={`${attemptNumber}-${index}-${ponyId}`}
+              ponyId={ponyId}
+              context="history"
+            />
+          ))}
+        </div>
+        <div
+          className="how-to-play__classic-feedback"
+          role="group"
+          aria-label={feedbackGroupAriaLabel(attempt.exact, attempt.partial)}
+        >
+          {tokens.map((type, index) => (
+            <FeedbackToken key={`${attemptNumber}-${type}-${index}`} type={type} size="demo" />
+          ))}
+        </div>
       </div>
-      <FeedbackGroup exact={attempt.exact} partial={attempt.partial} />
     </li>
+  );
+}
+
+function HowToPlayLegend() {
+  return (
+    <div className="how-to-play-dialog__legend" aria-label="Обозначения подсказок">
+      <span className="how-to-play-dialog__legend-item">
+        <FeedbackToken type="smile" size="demo" />
+        <span>на месте</span>
+      </span>
+      <span className="how-to-play-dialog__legend-item">
+        <FeedbackToken type="wink" size="demo" />
+        <span>есть, но в другом месте</span>
+      </span>
+      <span className="how-to-play-dialog__legend-item">
+        <FeedbackToken type="oops" size="demo" />
+        <span>нет совпадений</span>
+      </span>
+    </div>
   );
 }
 
@@ -203,6 +238,8 @@ export function HowToPlayDialog({ open, onClose }: HowToPlayDialogProps) {
               attempts={HOW_TO_PLAY_CLASSIC_ATTEMPTS}
             />
           </div>
+
+          <HowToPlayLegend />
         </div>
       </div>
     </div>
