@@ -9,7 +9,7 @@
 
 | Phase | Document |
 |-------|----------|
-| **Current: Sprint 3 — Android v0.1 planning (implementation not started)** | [planning/ANDROID_V0_1_SCOPE.md](planning/ANDROID_V0_1_SCOPE.md) |
+| **Current: Sprint 3 — Android v0.1 Step 1 complete** | [planning/ANDROID_TOOLCHAIN_DECISIONS.md](planning/ANDROID_TOOLCHAIN_DECISIONS.md) |
 | Beta 2 release record | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) |
 | Beginner scoring | [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) |
 | Mode selection UX | [planning/MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
@@ -29,7 +29,7 @@
 | Production (live) | **Beta 2** — https://pony-colour-code.pages.dev/ |
 | Sprint 2 | **COMPLETE** |
 | Beta 2 | **Published** — tag `beta-2` |
-| Sprint 3 | **Android v0.1 planned** — Capacitor **not installed** |
+| Sprint 3 | **Step 1 done** — toolchain discovery; Step 2 not started |
 | Tests | **64/64** PASS (Engine, Session, mode flow, presentation, mobile/history) |
 
 **What Beta 1 is:** the validated, published web game (Classic mode only in GAME UI). Tag `beta-1` marks the historical project freeze; runtime baseline `6353fec`.
@@ -246,11 +246,10 @@ Historical test plan: [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md).
 
 ## 14. Recommended next work (Sprint 3 — Android v0.1)
 
-Planning is **approved**. Implementation **not started**.
+Planning is **approved**. Step 1 toolchain discovery **complete**. Step 2 requires PO authorization.
 
-1. Read [planning/ANDROID_V0_1_SCOPE.md](planning/ANDROID_V0_1_SCOPE.md) and [ADR-002](architecture/ADR-002-single-repo-capacitor-android.md)
-2. Step 1: toolchain discovery (Capacitor, minSdk, targetSdk) — **requires PO GO**
-3. Do not install Capacitor or create `android/` without authorization
+1. Review [planning/ANDROID_TOOLCHAIN_DECISIONS.md](planning/ANDROID_TOOLCHAIN_DECISIONS.md) — PO decisions PO-01…PO-04
+2. Step 2: Capacitor integration on `feature/android-v0.1`
 
 Web Beta 2 on `main` must remain regression-free throughout.
 

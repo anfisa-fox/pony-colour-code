@@ -192,18 +192,16 @@ No local persistence layer required if WebView retains in-memory session.
 
 ---
 
-## 12. minSdk / targetSdk (unresolved — Step 1)
+## 12. minSdk / targetSdk — RESOLVED (Step 1)
 
-**Do not invent values in planning.**
+See [ANDROID_TOOLCHAIN_DECISIONS.md](./ANDROID_TOOLCHAIN_DECISIONS.md):
 
-Pre-implementation task (Step 1):
-
-1. Determine stable Capacitor version
-2. Read official Android requirements
-3. Set supported `minSdk`
-4. Set `targetSdk`
-5. Verify compatibility with Android 13 Go / TECNO BG6
-6. Document decision
+| Setting | Value |
+|---------|-------|
+| Capacitor | **8.5.0** |
+| minSdk | **24** |
+| compileSdk / targetSdk | **36** |
+| Test device BG6 (API 33) | Compatible |
 
 ---
 
@@ -235,8 +233,8 @@ Tag / release naming: **only after PO acceptance** (Step 6).
 
 | Step | Name | Deliverables |
 |------|------|--------------|
-| **1** | Android discovery / toolchain | Capacitor version, JDK/Android Studio/SDK, minSdk/targetSdk, package id, build strategy, risks |
-| **2** | Capacitor integration | deps, `capacitor.config`, `android/`, asset sync, first Android build |
+| **1** | Android discovery / toolchain | **DONE** — [ANDROID_TOOLCHAIN_DECISIONS.md](./ANDROID_TOOLCHAIN_DECISIONS.md) |
+| **2** | Capacitor integration | **NEXT** — awaiting PO Step 2 authorization |
 | **3** | Native shell polish | name, icon, splash, bars, safe areas, Back, lifecycle |
 | **4** | APK | installable APK, artifact path for PO |
 | **5** | Real device acceptance | TECNO BG6 smoke per §8 |
@@ -248,21 +246,24 @@ Tag / release naming: **only after PO acceptance** (Step 6).
 
 ## 15. Unresolved decisions (track in Step 1 / 3)
 
-| ID | Topic | Owner step |
-|----|-------|------------|
-| U-01 | Capacitor version | Step 1 |
-| U-02 | `minSdk` / `targetSdk` | Step 1 |
-| U-03 | Application / package id | Step 1 |
-| U-04 | Vite `base` (`./` vs `/`) for Capacitor | Step 2 |
-| U-05 | Google Fonts offline in APK (CDN vs self-host) | Step 2–3 |
-| U-06 | Android Back per screen (exact rules) | Step 3 |
-| U-07 | APK signing strategy (debug vs release keystore) | Step 4 |
+| ID | Topic | Status |
+|----|-------|--------|
+| U-01 | Capacitor version | **Resolved** — Step 1 |
+| U-02 | `minSdk` / `targetSdk` | **Resolved** — Step 1 |
+| U-03 | Application / package id | **PO approval** |
+| U-04 | Vite `base` | **Resolved** — `./` in Step 2 |
+| U-05 | Google Fonts offline | **Deferred** — P3-05 |
+| U-06 | Android Back per screen | **PO decision** — Step 3 |
+| U-07 | APK signing | **Resolved** — debug APK |
 | U-08 | Android v0.1 tag name | Step 6 (after PO) |
+| U-09 | Launcher icon | **PO decision** |
+
+Detail: [ANDROID_TOOLCHAIN_DECISIONS.md](./ANDROID_TOOLCHAIN_DECISIONS.md).
 
 ---
 
 ## References
 
-- [ANDROID_READINESS.md](./ANDROID_READINESS.md) — constraints carried from Sprint 2
+- [ANDROID_TOOLCHAIN_DECISIONS.md](./ANDROID_TOOLCHAIN_DECISIONS.md) — Step 1 toolchain decisions
 - [ADR-002-single-repo-capacitor-android.md](../architecture/ADR-002-single-repo-capacitor-android.md)
 - [RELEASE_BETA_2.md](../RELEASE_BETA_2.md) — accepted web baseline

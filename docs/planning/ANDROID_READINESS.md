@@ -27,7 +27,7 @@ installable APK (Android v0.1)
 | Engine | Platform-agnostic — no WebView/browser knowledge |
 | Platform code | Add only for real Android/web-specific features |
 
-Capacitor is **not installed yet**. `android/` does **not exist yet**.
+Capacitor is **not installed yet**. Step 1 toolchain discovery **complete** — see [ANDROID_TOOLCHAIN_DECISIONS.md](./ANDROID_TOOLCHAIN_DECISIONS.md).
 
 ---
 
@@ -94,18 +94,15 @@ Capacitor is **not installed yet**. `android/` does **not exist yet**.
 
 ---
 
-## 4. Android v0.1 work (Sprint 3 — planned, not started)
+## 4. Android v0.1 work (Sprint 3)
 
-See [ANDROID_V0_1_SCOPE.md](./ANDROID_V0_1_SCOPE.md):
+| Step | Status |
+|------|--------|
+| 1 — Toolchain discovery | **DONE** — [ANDROID_TOOLCHAIN_DECISIONS.md](./ANDROID_TOOLCHAIN_DECISIONS.md) |
+| 2 — Capacitor integration | **NEXT** — PO authorization required |
+| 3–6 | Not started |
 
-1. Toolchain discovery (Capacitor, minSdk, targetSdk)
-2. Capacitor + `android/` in repo
-3. Native shell polish (icon, splash, bars, Back, lifecycle)
-4. APK build
-5. TECNO Spark Go 2024 BG6 acceptance
-6. Checkpoint / tag after PO
-
-**Out of scope:** Google Play, AAB, backend, persistence, new gameplay.
+Capacitor **not installed**. `android/` **does not exist**.
 
 ---
 

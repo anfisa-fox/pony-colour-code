@@ -12,6 +12,8 @@
 
 Beta 2 is live. Next phase: Capacitor Android shell over the same codebase ([ANDROID_V0_1_SCOPE.md](docs/planning/ANDROID_V0_1_SCOPE.md)).
 
+| **Sprint 3** | Step 1 **done** — [ANDROID_TOOLCHAIN_DECISIONS.md](docs/planning/ANDROID_TOOLCHAIN_DECISIONS.md) |
+
 > **Sprint 3 entry point:** [`docs/planning/ANDROID_V0_1_SCOPE.md`](docs/planning/ANDROID_V0_1_SCOPE.md)
 
 ## Stack

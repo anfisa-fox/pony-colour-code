@@ -46,9 +46,10 @@ All Sprint 2 scope items **accepted**, including mobile polish, release prep, pr
 
 | Item | Status |
 |------|--------|
-| Android v0.1 scope | [planning/ANDROID_V0_1_SCOPE.md](planning/ANDROID_V0_1_SCOPE.md) — **planned** |
+| Android v0.1 scope | [planning/ANDROID_V0_1_SCOPE.md](planning/ANDROID_V0_1_SCOPE.md) — Step 1 **done** |
+| Toolchain decisions | [planning/ANDROID_TOOLCHAIN_DECISIONS.md](planning/ANDROID_TOOLCHAIN_DECISIONS.md) |
 | Capacitor / `android/` | **NOT installed / NOT created** |
-| Implementation | **NOT STARTED** — requires PO authorization |
+| Step 2 implementation | **Awaiting PO authorization** |
 
 Architecture: single repo, shared Engine + UI, Capacitor shell — [ADR-002](architecture/ADR-002-single-repo-capacitor-android.md).
 

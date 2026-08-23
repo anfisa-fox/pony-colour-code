@@ -11,8 +11,8 @@
 
 | Step | Status |
 |------|--------|
-| S3-01 Toolchain discovery | **Planned** |
-| S3-02 Capacitor integration | **Not started** |
+| S3-01 Toolchain discovery | **Done** |
+| S3-02 Capacitor integration | **Next / PO authorization** |
 | S3-03 Native shell polish | **Not started** |
 | S3-04 APK build | **Not started** |
 | S3-05 Real device acceptance (TECNO BG6) | **Not started** |
