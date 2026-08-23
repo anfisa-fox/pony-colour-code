@@ -28,7 +28,7 @@ export function FeedbackLegend({
           </span>
           <span className="feedback-legend-inline__item">
             <FeedbackToken type="oops" size="demo" />
-            <span>{isBeginner ? "нет" : "пони нет"}</span>
+            <span>{isBeginner ? "нет совпадений" : "пони нет"}</span>
           </span>
         </div>
         <p className="feedback-legend-inline__note">
@@ -75,8 +75,8 @@ export function FeedbackLegend({
           <span>
             {isBeginner
               ? compact
-                ? "нет"
-                : "Такой пони нет в коде"
+                ? "нет совпадений"
+                : "Нет совпадений для этой пони"
               : compact
                 ? "пони нет"
                 : "Совпадения нет"}

@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { GameExample } from "../components/GameExample";
+import { HowToPlayDialog } from "../components/HowToPlayDialog";
 import { ModeSelector, START_DEFAULT_MODE } from "../components/ModeSelector";
-import { MyWorldLink } from "../components/MyWorldLink";
 import { CHARACTERS } from "../data/characters";
 import type { GameMode } from "../game/types";
 
@@ -22,11 +22,10 @@ export function StartScreen({
   initialMode = START_DEFAULT_MODE,
 }: StartScreenProps) {
   const [selectedMode, setSelectedMode] = useState<GameMode>(initialMode);
+  const [howToPlayOpen, setHowToPlayOpen] = useState(false);
 
   return (
     <main className="screen screen--start">
-      <MyWorldLink className="screen__nav" />
-
       <header className="start-header">
         <h1 className="start-header__title">Pony Colour Code</h1>
 
@@ -75,6 +74,13 @@ export function StartScreen({
       <div className="screen__actions start-actions">
         <button
           type="button"
+          className="how-to-play-trigger"
+          onClick={() => setHowToPlayOpen(true)}
+        >
+          Как играть?
+        </button>
+        <button
+          type="button"
           className="button button--primary"
           onClick={() => onStart(selectedMode)}
         >
@@ -82,6 +88,8 @@ export function StartScreen({
         </button>
         <p className="screen__meta">Одна партия · примерно 5–10 минут</p>
       </div>
+
+      <HowToPlayDialog open={howToPlayOpen} onClose={() => setHowToPlayOpen(false)} />
     </main>
   );
 }

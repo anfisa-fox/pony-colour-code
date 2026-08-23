@@ -13,7 +13,7 @@ const POSITIONAL_TO_TOKEN: Record<PositionalFeedback, FeedbackType> = {
 const POSITIONAL_SLOT_LABELS: Record<PositionalFeedback, string> = {
   green: "на месте",
   yellow: "есть, но в другом месте",
-  pink: "нет",
+  pink: "нет совпадений",
 };
 
 export function getHistoryFeedbackPresentation(

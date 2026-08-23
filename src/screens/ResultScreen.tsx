@@ -1,5 +1,4 @@
 import { CharacterToken } from "../components/CharacterToken";
-import { MyWorldLink } from "../components/MyWorldLink";
 import { MAX_ATTEMPTS } from "../game/config";
 import type { GameSessionState } from "../game/sessionTypes";
 
@@ -14,8 +13,6 @@ export function ResultScreen({ state, onNewGame }: ResultScreenProps) {
 
   return (
     <main className="screen screen--result">
-      <MyWorldLink className="screen__nav" />
-
       <div className="result-panel">
         <div className="result-hero" aria-hidden="true" />
 

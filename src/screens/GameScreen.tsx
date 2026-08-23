@@ -5,7 +5,6 @@ import { CharacterPalette } from "../components/CharacterPalette";
 import { CharacterToken } from "../components/CharacterToken";
 import { FeedbackLegend } from "../components/FeedbackLegend";
 import { GuessRow } from "../components/GuessRow";
-import { MyWorldLink } from "../components/MyWorldLink";
 import { CODE_LENGTH, MAX_ATTEMPTS } from "../game/config";
 import { getHistoryNewestFirst } from "../game/gameHistoryPresentation";
 import type { gameSessionActions } from "../game/sessionReducer";
@@ -35,10 +34,7 @@ export function GameScreen({ state, dispatch, actions }: GameScreenProps) {
     <main className="screen screen--game">
       <div className="game-layout">
         <header className="game-header game-layout__header">
-          <div className="game-header__top">
-            <h1 className="game-header__title">Pony Colour Code</h1>
-            <MyWorldLink className="game-header__nav" />
-          </div>
+          <h1 className="game-header__title">Pony Colour Code</h1>
           <p className="game-header__attempts">
             Осталось попыток:{" "}
             <strong>
