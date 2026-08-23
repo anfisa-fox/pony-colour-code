@@ -5,11 +5,12 @@
 
 ---
 
-## 0. Sprint 2 — start here
+## 0. Start here
 
 | Phase | Document |
 |-------|----------|
-| **Current: Beta 2 published — post-Sprint 2 / Android next (PO authorization)** | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) |
+| **Current: Sprint 3 — Android v0.1 planning (implementation not started)** | [planning/ANDROID_V0_1_SCOPE.md](planning/ANDROID_V0_1_SCOPE.md) |
+| Beta 2 release record | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) |
 | Beginner scoring | [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) |
 | Mode selection UX | [planning/MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
 | Mobile GAME (P1-04) | [planning/MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
@@ -27,7 +28,8 @@
 |---|---|
 | Production (live) | **Beta 2** — https://pony-colour-code.pages.dev/ |
 | Sprint 2 | **COMPLETE** |
-| Beta 2 | **Published** — PO accepted 23 Aug 2026; tag `beta-2` |
+| Beta 2 | **Published** — tag `beta-2` |
+| Sprint 3 | **Android v0.1 planned** — Capacitor **not installed** |
 | Tests | **64/64** PASS (Engine, Session, mode flow, presentation, mobile/history) |
 
 **What Beta 1 is:** the validated, published web game (Classic mode only in GAME UI). Tag `beta-1` marks the historical project freeze; runtime baseline `6353fec`.
@@ -242,15 +244,15 @@ Historical test plan: [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md).
 
 ---
 
-## 14. Recommended next work (post-Beta 2)
+## 14. Recommended next work (Sprint 3 — Android v0.1)
 
-Beta 2 is **published and accepted**. Do not modify runtime without PO authorization.
+Planning is **approved**. Implementation **not started**.
 
-**Potential next phases (require separate PO approval):**
+1. Read [planning/ANDROID_V0_1_SCOPE.md](planning/ANDROID_V0_1_SCOPE.md) and [ADR-002](architecture/ADR-002-single-repo-capacitor-android.md)
+2. Step 1: toolchain discovery (Capacitor, minSdk, targetSdk) — **requires PO GO**
+3. Do not install Capacitor or create `android/` without authorization
 
-1. Android / Capacitor — [ANDROID_READINESS.md](planning/ANDROID_READINESS.md)
-2. My World integration — backlog P1-02/P1-03
-3. Post-Beta 2 backlog — [BACKLOG.md](BACKLOG.md)
+Web Beta 2 on `main` must remain regression-free throughout.
 
 ---
 
@@ -261,7 +263,8 @@ Beta 2 is **published and accepted**. Do not modify runtime without PO authoriza
 | `docs/planning/MVP_CONTRACT_v1.0.md` | **HISTORICAL (Beta 1 MVP)** | Single-mode scope; superseded for Sprint 2 by planning package |
 | `docs/ux/UI_SPECIFICATION_v1.0.md` | **HISTORICAL (Beta 1 UX)** | Aggregate feedback; Classic baseline |
 | `docs/architecture/ARCHITECTURE_v1.0.md` | **HISTORICAL (Beta 1 arch)** | No mode system; still valid for layering |
-| `docs/architecture/ADR-001-project-boundaries.md` | **CURRENT** | Accepted |
+| `docs/architecture/ADR-001-project-boundaries.md` | **CURRENT** | Accepted — My World boundaries |
+| `docs/architecture/ADR-002-single-repo-capacitor-android.md` | **CURRENT** | Accepted — Sprint 3 Android |
 | `docs/vision/PRODUCT_VISION.md` | **CURRENT (vision)** | Long-term direction; Sprint 2 uses Beginner/Classic naming |
 | `docs/RELEASE_BETA_1.md` | **HISTORICAL** | Beta 1 release record |
 | `mlp_codecracker_concept.html` | **HISTORICAL** | Early prototype |

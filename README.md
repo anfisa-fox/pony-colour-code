@@ -2,18 +2,17 @@
 
 Браузерная игра «угадай код» в духе Mastermind с персонажами G4 Mane 6. Часть семейного проекта **My World**, опубликована как **отдельное standalone-приложение**.
 
-## Status: Beta 2 published
+## Status: Beta 2 published — Sprint 3 Android v0.1 planning
 
 | | |
 |---|---|
 | **Production (Beta 2)** | https://pony-colour-code.pages.dev/ |
 | **Repository** | https://github.com/anfisa-fox/pony-colour-code |
-| **Beta 2 runtime** | `d83626c75b85dad9c1474b5878093915c09909eb` |
-| **Sprint 2** | **Complete** — Beta 2 published and PO accepted |
+| **Sprint 3** | Android v0.1 **planned** — implementation not started |
 
-Beta 2 adds Beginner Mode, mode selection, mobile GAME improvements, and how-to-play tutorial while preserving Classic gameplay.
+Beta 2 is live. Next phase: Capacitor Android shell over the same codebase ([ANDROID_V0_1_SCOPE.md](docs/planning/ANDROID_V0_1_SCOPE.md)).
 
-> **Sprint 2 entry point:** [`docs/planning/SPRINT_2_SCOPE.md`](docs/planning/SPRINT_2_SCOPE.md)
+> **Sprint 3 entry point:** [`docs/planning/ANDROID_V0_1_SCOPE.md`](docs/planning/ANDROID_V0_1_SCOPE.md)
 
 ## Stack
 
@@ -55,10 +54,12 @@ Full Beta 1 rules and invariants: [`docs/HANDOVER.md`](docs/HANDOVER.md)
 | [`docs/planning/BEGINNER_MODE_SPEC.md`](docs/planning/BEGINNER_MODE_SPEC.md) | Beginner scoring algorithm |
 | [`docs/planning/MODE_SELECTION_UX.md`](docs/planning/MODE_SELECTION_UX.md) | START mode selection UX |
 | [`docs/planning/MOBILE_GAME_UX_SPRINT_2.md`](docs/planning/MOBILE_GAME_UX_SPRINT_2.md) | Mobile GAME / P1-04 |
-| [`docs/planning/ANDROID_READINESS.md`](docs/planning/ANDROID_READINESS.md) | Future Capacitor constraints |
+| [`docs/planning/ANDROID_V0_1_SCOPE.md`](docs/planning/ANDROID_V0_1_SCOPE.md) | Sprint 3 Android v0.1 scope |
+| [`docs/planning/ANDROID_READINESS.md`](docs/planning/ANDROID_READINESS.md) | Web + Android shared constraints |
 | [`docs/BETA_TEST_PLAN.md`](docs/BETA_TEST_PLAN.md) | Beta 1 test plan (completed) |
 | [`docs/architecture/ARCHITECTURE_v1.0.md`](docs/architecture/ARCHITECTURE_v1.0.md) | Architecture v1 (Beta 1 baseline) |
 | [`docs/architecture/ADR-001-project-boundaries.md`](docs/architecture/ADR-001-project-boundaries.md) | My World boundaries |
+| [`docs/architecture/ADR-002-single-repo-capacitor-android.md`](docs/architecture/ADR-002-single-repo-capacitor-android.md) | Single repo + Capacitor Android |
 | [`docs/planning/MVP_CONTRACT_v1.0.md`](docs/planning/MVP_CONTRACT_v1.0.md) | MVP scope (Beta 1 historical) |
 | [`docs/ux/UI_SPECIFICATION_v1.0.md`](docs/ux/UI_SPECIFICATION_v1.0.md) | UX spec v1 (Beta 1 baseline) |
 | [`docs/vision/PRODUCT_VISION.md`](docs/vision/PRODUCT_VISION.md) | Product vision |

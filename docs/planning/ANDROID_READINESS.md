@@ -1,122 +1,124 @@
-# Android Readiness — Constraints for Sprint 2
+# Android Readiness — Constraints & Sprint 3 Direction
 
-**Status:** APPROVED (constraints only)  
-**Last updated:** 22 August 2026  
-**Implementation:** OUT OF SCOPE for Sprint 2
-
----
-
-## 1. Future direction (context)
-
-```
-React/Vite web application
-        ↓
-shared responsive UI / codebase
-        ↓
-Capacitor (future)
-        ↓
-Android application (APK)
-```
-
-**Goal:** ONE shared gameplay/UI codebase for Web and Android wherever practical.
-
-Sprint 2 mobile web UI should become the Android interface with **minimal or no visual redesign** later.
-
-Capacitor installation, `android/` project, and Play Store work are **explicitly out of Sprint 2 scope**.
+**Status:** ACTIVE — constraints for Web + Android shared codebase  
+**Last updated:** 23 August 2026  
+**Implementation scope:** [ANDROID_V0_1_SCOPE.md](./ANDROID_V0_1_SCOPE.md) (planning approved; **not started**)
 
 ---
 
-## 2. Constraints Sprint 2 developers MUST respect
+## 1. Architecture (accepted)
+
+```
+React/Vite web application (Beta 2)
+        ↓
+shared Engine + Session + UI  ← single source of truth
+        ↓
+Capacitor Android shell (Sprint 3 — planned)
+        ↓
+installable APK (Android v0.1)
+```
+
+**One game, multiple platforms.** See [ADR-002-single-repo-capacitor-android.md](../architecture/ADR-002-single-repo-capacitor-android.md).
+
+| Rule | Detail |
+|------|--------|
+| Repository | `anfisa-fox/pony-colour-code` only |
+| Branch | `main` integrates Web + Android |
+| Engine | Platform-agnostic — no WebView/browser knowledge |
+| Platform code | Add only for real Android/web-specific features |
+
+Capacitor is **not installed yet**. `android/` does **not exist yet**.
+
+---
+
+## 2. Constraints developers MUST respect (Web + future Android)
 
 ### Layout and CSS
 
 | Constraint | Rationale |
 |------------|-----------|
-| Use responsive CSS, not browser-only hacks | WebView behaves like mobile Chrome |
-| Prefer `100dvh` over `100vh` where full-height layouts matter | Mobile browser chrome / WebView insets |
-| Apply `env(safe-area-inset-*)` on bottom-fixed or sticky UI | Notched devices, gesture bar |
-| Avoid `position: fixed` unless tested with safe-area padding | Reduces Android migration surprises |
-| Mobile GAME layout per [MOBILE_GAME_UX_SPRINT_2.md](./MOBILE_GAME_UX_SPRINT_2.md) | Becomes Android primary UI |
+| Responsive CSS, not browser-only hacks | WebView ≈ mobile Chrome |
+| Prefer `100dvh` over `100vh` for full-height GAME | WebView insets |
+| `env(safe-area-inset-*)` on bottom-fixed UI | Gesture bar, notches |
+| Avoid untested `position: fixed` without safe-area | Android migration |
+| Mobile GAME layout per [MOBILE_GAME_UX_SPRINT_2.md](./MOBILE_GAME_UX_SPRINT_2.md) | Android primary UI |
 
 ### Assets and paths
 
 | Constraint | Rationale |
 |------------|-----------|
-| Keep asset paths as `/characters/…`, `/feedback/…` (root-relative) | Capacitor serves from `dist/` with configurable `base` |
-| Do not hardcode full production URLs for game assets | Local WebView bundle |
-| Avoid new dependencies that assume Node/browser-only APIs | Capacitor runs standard WebView |
+| Root-relative paths `/characters/…`, `/feedback/…` | Capacitor `dist/` bundle |
+| No hardcoded production URLs for game assets | Local WebView bundle |
+| Avoid Node/browser-only API dependencies | Standard WebView |
 
 ### Navigation and links
 
 | Constraint | Rationale |
 |------------|-----------|
-| My World links (when enabled later): use normal `<a href="https://…">` | Capacitor Browser plugin can open externally |
-| No iframe embedding of external sites | ADR-001 |
-| In-app navigation stays state machine (no React Router required) | Simple WebView single-activity pattern |
+| External links: normal `<a href="https://…">` when added | Capacitor Browser plugin |
+| No iframe embedding | ADR-001 |
+| In-app flow: state machine (no React Router required) | Single-activity WebView |
 
 ### Touch and interaction
 
 | Constraint | Rationale |
 |------------|-----------|
-| Touch targets ≥44px | Android HIG alignment |
+| Touch targets ≥44px | Android HIG |
 | No hover-only critical actions | Touch-first |
-| Real `<button>` elements for actions | Accessibility + WebView consistency |
+| Real `<button>` elements | Accessibility + WebView |
 
 ### Fonts
 
 | Constraint | Rationale |
 |------------|-----------|
-| Google Fonts CDN acceptable for Sprint 2 web Beta 2 | Future Android may require self-host (P3-05) |
-| If implementing font changes, prefer self-host path compatible with offline APK | Document in release notes |
+| Google Fonts CDN on web Beta 2 | May need self-host for offline APK (track U-05 in ANDROID_V0_1_SCOPE) |
 
 ### State and APIs
 
 | Constraint | Rationale |
 |------------|-----------|
-| In-memory session only (no required localStorage) | Simpler WebView lifecycle |
-| Keep Engine free of DOM/window | Already portable |
-| `Math.random()` acceptable for secret generation | No crypto requirement for family game |
+| In-memory session (no required localStorage) | WebView lifecycle |
+| Engine free of DOM/window | Portable |
+| `Math.random()` for secrets | Family game — acceptable |
 
 ---
 
-## 3. Already compatible (no Sprint 2 action required)
+## 3. Already compatible
 
-- React 19 + Vite SPA architecture
-- Pure TypeScript game engine
-- Minimal dependencies (`react`, `react-dom`)
-- Static PNG assets in `public/`
-- No service worker / PWA requirement
-- No backend API calls
-
----
-
-## 4. Android-only work (later phase)
-
-Not Sprint 2:
-
-- `npm install @capacitor/core @capacitor/android` etc.
-- `capacitor.config.ts`, `android/` project
-- App icons, splash screens, signing, Play Store
-- Status bar / navigation bar styling plugins
-- Deep links My World ↔ app
-- Optional: self-hosted fonts, asset size optimization for APK
-- Vite `base: './'` if required by Capacitor build pipeline
+- React 19 + Vite SPA
+- Pure TypeScript Engine
+- Minimal deps (`react`, `react-dom`)
+- Static PNG in `public/`
+- No backend API
+- Beta 2 mobile layout accepted on real devices
 
 ---
 
-## 5. Verification hint (future)
+## 4. Android v0.1 work (Sprint 3 — planned, not started)
 
-When Capacitor phase starts:
+See [ANDROID_V0_1_SCOPE.md](./ANDROID_V0_1_SCOPE.md):
 
-1. `npm run build` → copy `dist/` to Capacitor `webDir`
-2. Open Android emulator — confirm GAME mobile layout matches mobile web Beta 2
-3. Test safe-area on notched device
-4. Test offline play (fonts/assets)
+1. Toolchain discovery (Capacitor, minSdk, targetSdk)
+2. Capacitor + `android/` in repo
+3. Native shell polish (icon, splash, bars, Back, lifecycle)
+4. APK build
+5. TECNO Spark Go 2024 BG6 acceptance
+6. Checkpoint / tag after PO
+
+**Out of scope:** Google Play, AAB, backend, persistence, new gameplay.
+
+---
+
+## 5. Primary test device
+
+**TECNO Spark Go 2024 (BG6)** — Android 13 Go, 720×1612 — primary acceptance device for Android v0.1.
 
 ---
 
 ## References
 
+- [ANDROID_V0_1_SCOPE.md](./ANDROID_V0_1_SCOPE.md)
+- [ADR-002-single-repo-capacitor-android.md](../architecture/ADR-002-single-repo-capacitor-android.md)
 - [SPRINT_2_SCOPE.md](./SPRINT_2_SCOPE.md)
 - [MOBILE_GAME_UX_SPRINT_2.md](./MOBILE_GAME_UX_SPRINT_2.md)
 - [ADR-001-project-boundaries.md](../architecture/ADR-001-project-boundaries.md)

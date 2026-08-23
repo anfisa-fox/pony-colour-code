@@ -3,7 +3,26 @@
 **Source of truth** for open work.  
 **Last updated:** 23 August 2026
 
-**Sprint 2 entry point:** [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md)
+**Sprint 3 entry point:** [planning/ANDROID_V0_1_SCOPE.md](planning/ANDROID_V0_1_SCOPE.md)
+
+---
+
+## Sprint 3 — Android v0.1 (planning)
+
+| Step | Status |
+|------|--------|
+| S3-01 Toolchain discovery | **Planned** |
+| S3-02 Capacitor integration | **Not started** |
+| S3-03 Native shell polish | **Not started** |
+| S3-04 APK build | **Not started** |
+| S3-05 Real device acceptance (TECNO BG6) | **Not started** |
+| S3-06 Checkpoint / tag | **Not started** |
+
+Capacitor **not installed**. `android/` **not created**.
+
+---
+
+## Sprint 2 — completed
 
 Do **not** treat duplicate characters or Classic scoring engine as defects — see [HANDOVER.md](HANDOVER.md) invariants.
 
@@ -41,7 +60,7 @@ Do **not** treat duplicate characters or Classic scoring engine as defects — s
 | S2-03 | P0 | **Done** | **Mode Selection UX** on START — Beginner default | [MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md); PO accepted 22 Aug 2026 |
 | S2-04 | P0 | **Done** | **Mobile GAME UX** — resolve P1-04 | [MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md); PO accepted 414×896 |
 | S2-05 | P1 | **Done** | **START + RESULT mobile review** | Verified 414×896 / 360×780; no runtime changes; 375×667 stress only |
-| S2-06 | P1 | Open | **Android readiness constraints** | [ANDROID_READINESS.md](planning/ANDROID_READINESS.md) — out of sprint implementation |
+| S2-06 | P1 | **Planned → S3** | **Android readiness** | Constraints in [ANDROID_READINESS.md](planning/ANDROID_READINESS.md); scope in [ANDROID_V0_1_SCOPE.md](planning/ANDROID_V0_1_SCOPE.md) |
 | S2-07 | P0 | **Done** | **Automated tests** | 64 tests |
 | S2-08 | P1 | **Done** | **Web Beta 2 release** | Published; PO accepted 23 Aug 2026 |
 | S2-09 | P1 | **Done** | **START hero character orientation** | Mirrored Pinkie/Fluttershy/Rarity on hero ensemble |
