@@ -9,7 +9,7 @@
 
 | Phase | Document |
 |-------|----------|
-| **Current: Sprint 2 — Beta 2 release prep (S2-08)** | [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) |
+| **Current: Beta 2 release candidate — awaiting PO GO for deploy/tag** | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) |
 | Beginner scoring | [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) |
 | Mode selection UX | [planning/MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
 | Mobile GAME (P1-04) | [planning/MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
@@ -26,8 +26,8 @@
 | | |
 |---|---|
 | Production (live) | **Beta 1** — https://pony-colour-code.pages.dev/ |
-| Sprint 2 | **IN PROGRESS** — Steps 1–3, P1-04, S2-05/09/10 **accepted**; **S2-08 Beta 2 prep next** |
-| Beta 2 | **Not released**; deployment **not performed** |
+| Sprint 2 | **COMPLETE** (Beta 2 scope) — S2-08 release prep **done** |
+| Beta 2 | **Release candidate ready**; not deployed; `beta-2` tag **not created** |
 | Tests | **64/64** PASS (Engine, Session, mode flow, presentation, mobile/history) |
 
 **What Beta 1 is:** the validated, published web game (Classic mode only in GAME UI). Tag `beta-1` marks the historical project freeze; runtime baseline `6353fec`.
@@ -242,15 +242,18 @@ Historical test plan: [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md).
 
 ---
 
-## 14. Recommended next work (Beta 2 release prep — S2-08)
+## 14. Recommended next work (awaiting PO GO)
 
-1. Read [planning/SPRINT_2_SCOPE.md](planning/SPRINT_2_SCOPE.md) progress section
-2. `npm install`; `npm run test:run && npm run build` — confirm 64/64 baseline
-3. Full regression: desktop + mobile (414×896 primary, 360×780 lower bound)
-4. [RELEASE_BETA_2.md](RELEASE_BETA_2.md) checklist + PO sign-off
-5. Deploy only after explicit PO authorization
+Sprint 2 and S2-08 release prep are **complete**. Beta 2 release candidate is on `main`.
 
-Do not modify Classic `evaluateGuess()` semantics.
+**Next actions require explicit Product Owner authorization:**
+
+1. Deploy to production (Cloudflare Pages)
+2. Create `beta-2` tag on deploy commit
+3. Post-deploy production smoke test
+4. Update [PROJECT_STATUS.md](PROJECT_STATUS.md) to Beta 2 published
+
+Do **not** deploy, tag, or modify runtime without PO GO.
 
 **Android / Capacitor:** planned as a separate major phase **after Beta 2** — constraints in [ANDROID_READINESS.md](planning/ANDROID_READINESS.md); not started.
 

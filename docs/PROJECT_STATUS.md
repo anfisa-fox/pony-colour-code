@@ -1,13 +1,13 @@
 # Project Status — Pony Colour Code
 
 **Last updated:** 23 August 2026  
-**Status:** **SPRINT 2 — IN PROGRESS (Beta 2 prep next)**
+**Status:** **SPRINT 2 COMPLETE — Beta 2 RELEASE CANDIDATE READY**
 
 ---
 
 ## Summary
 
-Beta 1 is **published** and user testing is **complete and successful**. Sprint 2 core implementation and mobile polish are **completed and accepted** locally. Production still serves **Beta 1** until Beta 2 is deployed.
+Beta 1 is **published** and user testing is **complete and successful**. Sprint 2 implementation, mobile acceptance, and Beta 2 release preparation are **complete**. Production still serves **Beta 1** until Beta 2 is deployed and tagged.
 
 | Item | Value |
 |------|-------|
@@ -19,7 +19,7 @@ Beta 1 is **published** and user testing is **complete and successful**. Sprint 
 
 ---
 
-## Sprint 2 — IN PROGRESS
+## Sprint 2 — COMPLETE (Beta 2 scope)
 
 ### Completed / accepted
 
@@ -58,20 +58,30 @@ START / GAME / RESULT на **360×780** — без критичных layout/ove
 - Последний режим pre-selected на START (`returnToStart` + `initialMode`)
 - Вручную проверен PO
 
-### Current validation
+**S2-08 — Beta 2 release preparation** — COMPLETED
+
+- Manual regression / smoke validation: **COMPLETE**
+- Desktop end-to-end smoke-check (23 Aug 2026): **PASS** — START → GAME (Beginner) → RESULT → START
+- Mobile acceptance (P1-04, S2-05, 360×780): **PASS** (prior Sprint 2)
+- Extended separate Regression Pass: **not required** (PO minimal release gate)
+- Automated + build final checkpoint: see validation table below
+
+### Final validation (S2-08 checkpoint)
 
 | Check | Result |
 |-------|--------|
 | `npm run test:run` | PASS — **64/64** |
 | `npm run build` | PASS |
+| Manual smoke / regression | **COMPLETE** |
+| Beta 2 release candidate | **READY** |
 
-### Next
+### Next — awaiting PO GO
 
-**S2-08 — Beta 2 regression + release preparation**
+- Deploy to production (Cloudflare Pages)
+- Create `beta-2` tag
+- Update status docs post-deploy
 
-- Full regression pass (desktop + mobile viewports)
-- [RELEASE_BETA_2.md](RELEASE_BETA_2.md) checklist
-- PO sign-off before deploy
+**Do not deploy or tag without explicit Product Owner authorization.**
 
 ---
 
@@ -80,8 +90,8 @@ START / GAME / RESULT на **360×780** — без критичных layout/ove
 | Item | Status |
 |------|--------|
 | Текущая production-версия | **Beta 1** (https://pony-colour-code.pages.dev/) |
-| Локальный main | Sprint 2 features + mobile polish **accepted, not deployed** |
-| Beta 2 | **NOT RELEASED** |
+| Локальный main | Beta 2 **release candidate** on `main` |
+| Beta 2 | **NOT RELEASED** — RC ready; tag **not created** |
 | Deployment | **NOT PERFORMED** |
 
 ---
@@ -115,8 +125,7 @@ User testing **complete and successful**. Beta 1 runtime remains the immutable h
 ## Timeline
 
 ```
-Beta 1 → Sprint 2 Steps 1–3 → Mobile GAME/P1-04 → mobile polish (S2-05/09/10)
-  → Beta 2 regression + release (next)
+Beta 1 → Sprint 2 (complete) → Beta 2 RC ready → deploy + beta-2 tag (awaiting PO GO)
 ```
 
 Historical Beta 1 freeze: [`RELEASE_BETA_1.md`](RELEASE_BETA_1.md), tag `beta-1`.
