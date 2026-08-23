@@ -20,8 +20,7 @@ Do **not** treat duplicate characters or Classic scoring engine as defects — s
 | Mobile START/RESULT (S2-05) | **Done / Verified** |
 | S2-09 START hero orientation | **Done / Accepted** |
 | S2-10 RESULT → START | **Done** |
-| Beta 2 release prep (S2-08) | **Done** — RC ready |
-| Beta 2 deploy + tag | **Awaiting PO GO** |
+| Beta 2 release (S2-08) | **Done / Released** |
 
 ---
 
@@ -44,7 +43,7 @@ Do **not** treat duplicate characters or Classic scoring engine as defects — s
 | S2-05 | P1 | **Done** | **START + RESULT mobile review** | Verified 414×896 / 360×780; no runtime changes; 375×667 stress only |
 | S2-06 | P1 | Open | **Android readiness constraints** | [ANDROID_READINESS.md](planning/ANDROID_READINESS.md) — out of sprint implementation |
 | S2-07 | P0 | **Done** | **Automated tests** | 64 tests |
-| S2-08 | P1 | **Done** | **Web Beta 2 release preparation** | RC ready; manual smoke complete; deploy/tag awaiting PO GO |
+| S2-08 | P1 | **Done** | **Web Beta 2 release** | Published; PO accepted 23 Aug 2026 |
 | S2-09 | P1 | **Done** | **START hero character orientation** | Mirrored Pinkie/Fluttershy/Rarity on hero ensemble |
 | S2-10 | P1 | **Done** | **RESULT → START mode-selection flow** | `returnToStart`; last mode pre-selected |
 

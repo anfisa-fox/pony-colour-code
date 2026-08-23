@@ -9,7 +9,7 @@
 
 | Phase | Document |
 |-------|----------|
-| **Current: Beta 2 release candidate — awaiting PO GO for deploy/tag** | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) |
+| **Current: Beta 2 published — post-Sprint 2 / Android next (PO authorization)** | [RELEASE_BETA_2.md](RELEASE_BETA_2.md) |
 | Beginner scoring | [planning/BEGINNER_MODE_SPEC.md](planning/BEGINNER_MODE_SPEC.md) |
 | Mode selection UX | [planning/MODE_SELECTION_UX.md](planning/MODE_SELECTION_UX.md) |
 | Mobile GAME (P1-04) | [planning/MOBILE_GAME_UX_SPRINT_2.md](planning/MOBILE_GAME_UX_SPRINT_2.md) |
@@ -25,9 +25,9 @@
 
 | | |
 |---|---|
-| Production (live) | **Beta 1** — https://pony-colour-code.pages.dev/ |
-| Sprint 2 | **COMPLETE** (Beta 2 scope) — S2-08 release prep **done** |
-| Beta 2 | **Release candidate ready**; not deployed; `beta-2` tag **not created** |
+| Production (live) | **Beta 2** — https://pony-colour-code.pages.dev/ |
+| Sprint 2 | **COMPLETE** |
+| Beta 2 | **Published** — PO accepted 23 Aug 2026; tag `beta-2` |
 | Tests | **64/64** PASS (Engine, Session, mode flow, presentation, mobile/history) |
 
 **What Beta 1 is:** the validated, published web game (Classic mode only in GAME UI). Tag `beta-1` marks the historical project freeze; runtime baseline `6353fec`.
@@ -38,9 +38,9 @@
 - **P1-04 / S2-04:** mobile GAME flex layout; actions without mandatory page scroll (414×896 accepted)
 - **S2-05:** mobile START/RESULT verified on 414×896 and 360×780 (no runtime changes)
 - **S2-09:** START hero mirrored orientation for Pinkie / Fluttershy / Rarity (matches GAME)
-- **S2-10:** RESULT → START → mode confirm → GAME; last mode pre-selected
+- **Tutorial polish:** «Как играть?»; «нет совпадений»; My World link removed
 
-**What production still shows:** Beta 1 until Beta 2 deploy. Local main includes full Sprint 2 mobile polish (not yet released).
+**Production serves Beta 2** — PO visual acceptance complete (desktop + mobile).
 
 ---
 
@@ -242,20 +242,15 @@ Historical test plan: [BETA_TEST_PLAN.md](BETA_TEST_PLAN.md).
 
 ---
 
-## 14. Recommended next work (awaiting PO GO)
+## 14. Recommended next work (post-Beta 2)
 
-Sprint 2 and S2-08 release prep are **complete**. Beta 2 release candidate is on `main`.
+Beta 2 is **published and accepted**. Do not modify runtime without PO authorization.
 
-**Next actions require explicit Product Owner authorization:**
+**Potential next phases (require separate PO approval):**
 
-1. Deploy to production (Cloudflare Pages)
-2. Create `beta-2` tag on deploy commit
-3. Post-deploy production smoke test
-4. Update [PROJECT_STATUS.md](PROJECT_STATUS.md) to Beta 2 published
-
-Do **not** deploy, tag, or modify runtime without PO GO.
-
-**Android / Capacitor:** planned as a separate major phase **after Beta 2** — constraints in [ANDROID_READINESS.md](planning/ANDROID_READINESS.md); not started.
+1. Android / Capacitor — [ANDROID_READINESS.md](planning/ANDROID_READINESS.md)
+2. My World integration — backlog P1-02/P1-03
+3. Post-Beta 2 backlog — [BACKLOG.md](BACKLOG.md)
 
 ---
 

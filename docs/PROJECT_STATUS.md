@@ -1,87 +1,34 @@
 # Project Status — Pony Colour Code
 
 **Last updated:** 23 August 2026  
-**Status:** **SPRINT 2 COMPLETE — Beta 2 RELEASE CANDIDATE READY**
+**Status:** **BETA 2 PUBLISHED — Sprint 2 COMPLETE**
 
 ---
 
 ## Summary
 
-Beta 1 is **published** and user testing is **complete and successful**. Sprint 2 implementation, mobile acceptance, and Beta 2 release preparation are **complete**. Production still serves **Beta 1** until Beta 2 is deployed and tagged.
+Beta 2 is **published** and **accepted by Product Owner** (desktop + mobile production visual check). Sprint 2 is **complete**.
 
 | Item | Value |
 |------|-------|
-| Production URL (Beta 1) | https://pony-colour-code.pages.dev/ |
+| Production URL | https://pony-colour-code.pages.dev/ |
 | GitHub | https://github.com/anfisa-fox/pony-colour-code |
-| Beta 1 runtime baseline | `6353feceb2d4712697466672339842cdb0a384a1` |
+| Beta 2 runtime | `d83626c75b85dad9c1474b5878093915c09909eb` |
+| Beta 2 tag | `beta-2` |
 | Beta 1 tag | `beta-1` (historical freeze — do not move) |
-| Sprint 2 entry point | [`planning/SPRINT_2_SCOPE.md`](planning/SPRINT_2_SCOPE.md) |
+| Sprint 2 record | [`planning/SPRINT_2_SCOPE.md`](planning/SPRINT_2_SCOPE.md) |
 
 ---
 
-## Sprint 2 — COMPLETE (Beta 2 scope)
+## Sprint 2 — COMPLETE
 
-### Completed / accepted
-
-**Шаг 1 — Dual-mode mechanics** — COMPLETED / ACCEPTED
-
-**Шаг 2 — START / Mode Selection UX** — COMPLETED / ACCEPTED BY PRODUCT OWNER
-
-**Шаг 3 — GAME dual-mode feedback UI** — COMPLETED / ACCEPTED BY PRODUCT OWNER
-
-**P1-04 / Mobile GAME (S2-04)** — COMPLETED / ACCEPTED
-
-- Mobile flex/fullscreen GAME architecture (`100dvh`)
-- Основной цикл без обязательного page scroll на **414×896** (iPhone XR)
-- History newest-first с internal scroll; auto-scroll к верху после новой попытки
-- Controls + palette вне History scroll-area
-
-**S2-05 — Mobile START / RESULT polish** — COMPLETED / VERIFIED *(без runtime changes)*
-
-| Viewport | Role |
-|----------|------|
-| **414×896** | Основной реальный acceptance target |
-| **360×780** | Принятая нижняя современная контрольная граница |
-| **375×667** | Legacy/stress-test; **не** acceptance target |
-
-START / GAME / RESULT на **360×780** — без критичных layout/overflow проблем (PO verified).
-
-**S2-09 — START hero character orientation** — COMPLETED / ACCEPTED
-
-- Пинки Пай, Флаттершай, Рарити на START используют ту же mirrored orientation, что в GAME
-- Персонажи 1–3 (Искорка, Радуга Дэш, Эпплджек) не менялись
-- CSS-only; assets без изменений
-
-**S2-10 — RESULT → START mode selection** — COMPLETED
-
-- Flow: `RESULT → START → выбор/подтверждение режима → Играть → GAME`
-- Последний режим pre-selected на START (`returnToStart` + `initialMode`)
-- Вручную проверен PO
-
-**S2-08 — Beta 2 release preparation** — COMPLETED
-
-- Manual regression / smoke validation: **COMPLETE**
-- Desktop end-to-end smoke-check (23 Aug 2026): **PASS** — START → GAME (Beginner) → RESULT → START
-- Mobile acceptance (P1-04, S2-05, 360×780): **PASS** (prior Sprint 2)
-- Extended separate Regression Pass: **not required** (PO minimal release gate)
-- Automated + build final checkpoint: see validation table below
-
-### Final validation (S2-08 checkpoint)
+All Sprint 2 scope items **accepted**, including mobile polish, release prep, production deploy, tutorial polish, and PO visual acceptance.
 
 | Check | Result |
 |-------|--------|
 | `npm run test:run` | PASS — **64/64** |
 | `npm run build` | PASS |
-| Manual smoke / regression | **COMPLETE** |
-| Beta 2 release candidate | **READY** |
-
-### Next — awaiting PO GO
-
-- Deploy to production (Cloudflare Pages)
-- Create `beta-2` tag
-- Update status docs post-deploy
-
-**Do not deploy or tag without explicit Product Owner authorization.**
+| Production visual QA | **ACCEPTED** (desktop + mobile) |
 
 ---
 
@@ -89,43 +36,32 @@ START / GAME / RESULT на **360×780** — без критичных layout/ove
 
 | Item | Status |
 |------|--------|
-| Текущая production-версия | **Beta 1** (https://pony-colour-code.pages.dev/) |
-| Локальный main | Beta 2 **release candidate** on `main` |
-| Beta 2 | **NOT RELEASED** — RC ready; tag **not created** |
-| Deployment | **NOT PERFORMED** |
+| Текущая production-версия | **Beta 2** |
+| PO acceptance | **ACCEPTED** — 23 August 2026 |
+| Deploy | **COMPLETE** |
 
 ---
 
-## Android
+## Next (out of Sprint 2 — requires PO authorization)
 
-| Item | Status |
-|------|--------|
-| Android / Capacitor | Следующий большой этап **после Beta 2** |
-| Capacitor | **Не установлен** |
-
----
-
-## Beta 1 outcome (complete)
-
-User testing **complete and successful**. Beta 1 runtime remains the immutable historical baseline.
+- Android / Capacitor (S2-06 constraints documented; implementation not started)
+- My World integration (P1-02/P1-03 deferred)
+- Post-Beta 2 backlog items per [BACKLOG.md](BACKLOG.md)
 
 ---
 
-## Known limitations (Beta 1 production, until Beta 2 deploy)
+## Known limitations
 
-- Production still serves Beta 1 Classic-only GAME UI and pre-Sprint-2 mobile layout
-- «Вернуться в My World» — disabled UI placeholder
+- My World integration not implemented (P1-02/P1-03 deferred)
 - Decorative purple orb on RESULT (P2-02 deferred)
 - ~19 MB static assets; Google Fonts CDN
-
-*P1-04 resolved locally; deploy pending Beta 2 release.*
 
 ---
 
 ## Timeline
 
 ```
-Beta 1 → Sprint 2 (complete) → Beta 2 RC ready → deploy + beta-2 tag (awaiting PO GO)
+Beta 1 → Sprint 2 → Beta 2 published (23 Aug 2026)
 ```
 
-Historical Beta 1 freeze: [`RELEASE_BETA_1.md`](RELEASE_BETA_1.md), tag `beta-1`.
+Historical: [`RELEASE_BETA_1.md`](RELEASE_BETA_1.md), tag `beta-1`.

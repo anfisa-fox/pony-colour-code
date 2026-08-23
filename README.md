@@ -2,16 +2,16 @@
 
 Браузерная игра «угадай код» в духе Mastermind с персонажами G4 Mane 6. Часть семейного проекта **My World**, опубликована как **отдельное standalone-приложение**.
 
-## Status: Sprint 2 complete — Beta 2 release candidate ready
+## Status: Beta 2 published
 
 | | |
 |---|---|
-| **Production (Beta 1)** | https://pony-colour-code.pages.dev/ |
+| **Production (Beta 2)** | https://pony-colour-code.pages.dev/ |
 | **Repository** | https://github.com/anfisa-fox/pony-colour-code |
-| **Beta 1 runtime baseline** | `6353feceb2d4712697466672339842cdb0a384a1` — *Beta 1: initial playable release* |
-| **Sprint 2 progress** | **Complete** — Beta 2 RC ready; deploy/tag awaiting PO GO |
+| **Beta 2 runtime** | `d83626c75b85dad9c1474b5878093915c09909eb` |
+| **Sprint 2** | **Complete** — Beta 2 published and PO accepted |
 
-Beta 1 user testing is **complete and successful**. Sprint 2 adds Beginner Mode, mode selection, and mobile GAME improvements while preserving Classic (Beta 1) gameplay. **Beta 2 is not yet released** — production still serves Beta 1.
+Beta 2 adds Beginner Mode, mode selection, mobile GAME improvements, and how-to-play tutorial while preserving Classic gameplay.
 
 > **Sprint 2 entry point:** [`docs/planning/SPRINT_2_SCOPE.md`](docs/planning/SPRINT_2_SCOPE.md)
 

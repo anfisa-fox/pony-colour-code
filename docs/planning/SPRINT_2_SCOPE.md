@@ -197,13 +197,7 @@ Do not silently rewrite v1 documents.
 | **Beta 2 polish — RESULT → START** | S2-10 | **DONE** | `returnToStart`; mode pre-selected |
 | Android/Capacitor readiness | S2-06 | **OUT OF SPRINT** | After Beta 2 |
 | Regression + expanded tests | S2-07 | **DONE** | 64 unit tests |
-| Beta 2 release prep | S2-08 | **DONE** | RC ready; manual smoke complete; deploy/tag awaiting PO GO |
-| Beta 2 deploy + tag | — | **AWAITING PO GO** | Production still Beta 1 |
+| Beta 2 release | S2-08 | **DONE / RELEASED** | Deploy + PO acceptance complete |
+| Beta 2 tag | — | **DONE** | `beta-2` on release commit |
 
-**Mobile viewport policy (S2-05):** 414×896 primary; 360×780 accepted lower bound; 375×667 legacy stress only.
-
-**Manual regression (S2-08):** COMPLETE — mobile acceptance + desktop smoke (23 Aug 2026). Extended separate pass not required (PO decision).
-
-**Final validation:** `npm run test:run` — 64/64 PASS; `npm run build` — PASS.
-
-**Production:** Beta 1 live; Beta 2 **NOT RELEASED**; `beta-2` tag **NOT CREATED**; deployment **NOT PERFORMED**.
+**Production:** Beta 2 live at https://pony-colour-code.pages.dev/ — PO accepted 23 Aug 2026.
