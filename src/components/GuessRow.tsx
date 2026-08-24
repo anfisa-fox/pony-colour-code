@@ -13,15 +13,28 @@ type GuessRowProps = {
   record: GuessRecord;
   attemptNumber: number;
   gameMode: GameMode;
+  variant?: "list" | "carousel";
 };
 
-export function GuessRow({ record, attemptNumber, gameMode }: GuessRowProps) {
+export function GuessRow({
+  record,
+  attemptNumber,
+  gameMode,
+  variant = "list",
+}: GuessRowProps) {
   const presentation = getHistoryFeedbackPresentation(gameMode);
+  const RowTag = variant === "carousel" ? "div" : "li";
+  const rowClassName =
+    variant === "carousel"
+      ? `guess-row guess-row--carousel guess-row--${presentation === "positional" ? "beginner" : "classic"}`
+      : `guess-row guess-row--${presentation === "positional" ? "beginner" : "classic"}`;
 
   if (presentation === "positional" && record.positional) {
     return (
-      <li className="guess-row guess-row--beginner">
-        <span className="guess-row__number">{attemptNumber}</span>
+      <RowTag className={rowClassName}>
+        {variant === "list" ? (
+          <span className="guess-row__number">{attemptNumber}</span>
+        ) : null}
 
         <div
           className="guess-row__positional"
@@ -40,13 +53,15 @@ export function GuessRow({ record, attemptNumber, gameMode }: GuessRowProps) {
             </div>
           ))}
         </div>
-      </li>
+      </RowTag>
     );
   }
 
   return (
-    <li className="guess-row guess-row--classic">
-      <span className="guess-row__number">{attemptNumber}</span>
+    <RowTag className={rowClassName}>
+      {variant === "list" ? (
+        <span className="guess-row__number">{attemptNumber}</span>
+      ) : null}
 
       <div className="guess-row__pegs" aria-label={`Попытка ${attemptNumber}`}>
         {record.guess.map((ponyId, index) => (
@@ -57,6 +72,6 @@ export function GuessRow({ record, attemptNumber, gameMode }: GuessRowProps) {
       <div className="guess-row__separator" aria-hidden="true" />
 
       <FeedbackGroup exact={record.exact} partial={record.partial} />
-    </li>
+    </RowTag>
   );
 }

@@ -1,16 +1,11 @@
 import { useState } from "react";
 
-import { GameExample } from "../components/GameExample";
+import { CharacterProfileSheet } from "../components/CharacterProfileSheet";
 import { HowToPlayDialog } from "../components/HowToPlayDialog";
 import { ModeSelector, START_DEFAULT_MODE } from "../components/ModeSelector";
 import { CHARACTERS } from "../data/characters";
+import type { ManeSixPonyId } from "../game/config";
 import type { GameMode } from "../game/types";
-
-const START_STEPS = [
-  "Выбери 4 пони",
-  "Подтверди догадку",
-  "Используй подсказки и разгадай код",
-] as const;
 
 type StartScreenProps = {
   onStart: (mode: GameMode) => void;
@@ -23,6 +18,7 @@ export function StartScreen({
 }: StartScreenProps) {
   const [selectedMode, setSelectedMode] = useState<GameMode>(initialMode);
   const [howToPlayOpen, setHowToPlayOpen] = useState(false);
+  const [profilePonyId, setProfilePonyId] = useState<ManeSixPonyId | null>(null);
 
   return (
     <main className="screen screen--start">
@@ -32,53 +28,42 @@ export function StartScreen({
         <ul className="start-hero-ensemble" aria-label="Персонажи игры">
           {CHARACTERS.map((character) => (
             <li key={character.id} className="start-hero-ensemble__item">
-              <img
-                className={`start-hero-ensemble__figure${
-                  character.mirrored ? " start-hero-ensemble__figure--mirrored" : ""
-                }`}
-                src={character.image}
-                alt=""
-                draggable={false}
-              />
-              <span className="start-hero-ensemble__name">{character.name}</span>
+              <button
+                type="button"
+                className="start-hero-ensemble__button"
+                onClick={() => setProfilePonyId(character.id)}
+                aria-label={`Открыть карточку: ${character.name}`}
+              >
+                <span className="start-hero-ensemble__figure-wrap">
+                  <img
+                    className={`start-hero-ensemble__figure${
+                      character.mirrored ? " start-hero-ensemble__figure--mirrored" : ""
+                    }`}
+                    src={character.image}
+                    alt=""
+                    draggable={false}
+                  />
+                </span>
+                <span className="start-hero-ensemble__name">{character.name}</span>
+              </button>
             </li>
           ))}
         </ul>
-
-        <p className="start-header__subtitle">
-          Угадай секретный код из пони — классический Mastermind с магией дружбы.
-        </p>
       </header>
 
-      <ol className="start-steps" aria-label="Как играть">
-        {START_STEPS.map((step, index) => (
-          <li key={step} className="start-step">
-            <span className="start-step__number" aria-hidden="true">
-              {index + 1}
-            </span>
-            <span className="start-step__text">{step}</span>
-          </li>
-        ))}
-      </ol>
+      <button
+        type="button"
+        className="button button--secondary"
+        onClick={() => setHowToPlayOpen(true)}
+      >
+        Как играть?
+      </button>
 
-      <section className="start-mode" aria-labelledby="start-mode-heading">
-        <h2 id="start-mode-heading" className="section-heading">
-          Выбери режим
-        </h2>
-
-        <GameExample />
-
+      <section className="start-mode" aria-label="Выбор режима игры">
         <ModeSelector selectedMode={selectedMode} onSelect={setSelectedMode} />
       </section>
 
       <div className="screen__actions start-actions">
-        <button
-          type="button"
-          className="button button--secondary"
-          onClick={() => setHowToPlayOpen(true)}
-        >
-          Как играть?
-        </button>
         <button
           type="button"
           className="button button--primary"
@@ -86,10 +71,13 @@ export function StartScreen({
         >
           Играть
         </button>
-        <p className="screen__meta">Одна партия · примерно 5–10 минут</p>
       </div>
 
       <HowToPlayDialog open={howToPlayOpen} onClose={() => setHowToPlayOpen(false)} />
+      <CharacterProfileSheet
+        ponyId={profilePonyId}
+        onClose={() => setProfilePonyId(null)}
+      />
     </main>
   );
 }

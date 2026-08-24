@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 import { CharacterToken } from "./CharacterToken";
 import { FeedbackToken } from "./FeedbackToken";
@@ -14,6 +14,12 @@ import {
   feedbackGroupAriaLabel,
   positionalToFeedbackType,
 } from "./feedbackUtils";
+
+const HOW_TO_PLAY_STEPS = [
+  "Выбери 4 пони",
+  "Подтверди догадку",
+  "Используй подсказки и разгадай код",
+] as const;
 
 type HowToPlayDialogProps = {
   open: boolean;
@@ -166,6 +172,19 @@ function TutorialColumn({ title, note, mode, attempts }: TutorialColumnProps) {
 export function HowToPlayDialog({ open, onClose }: HowToPlayDialogProps) {
   const titleId = useId();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const [showScrollHint, setShowScrollHint] = useState(false);
+
+  const updateScrollHint = useCallback(() => {
+    const body = bodyRef.current;
+    if (!body) {
+      setShowScrollHint(false);
+      return;
+    }
+
+    const remaining = body.scrollHeight - body.scrollTop - body.clientHeight;
+    setShowScrollHint(remaining > 24);
+  }, []);
 
   useEffect(() => {
     if (!open) {
@@ -189,6 +208,40 @@ export function HowToPlayDialog({ open, onClose }: HowToPlayDialogProps) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [open, onClose]);
+
+  useEffect(() => {
+    if (!open) {
+      return;
+    }
+
+    updateScrollHint();
+
+    const body = bodyRef.current;
+    if (!body) {
+      return;
+    }
+
+    body.addEventListener("scroll", updateScrollHint, { passive: true });
+    const resizeObserver = new ResizeObserver(updateScrollHint);
+    resizeObserver.observe(body);
+
+    return () => {
+      body.removeEventListener("scroll", updateScrollHint);
+      resizeObserver.disconnect();
+    };
+  }, [open, updateScrollHint]);
+
+  function scrollDown() {
+    const body = bodyRef.current;
+    if (!body) {
+      return;
+    }
+
+    body.scrollBy({
+      top: Math.max(body.clientHeight * 0.55, 180),
+      behavior: "smooth",
+    });
+  }
 
   if (!open) {
     return null;
@@ -218,11 +271,19 @@ export function HowToPlayDialog({ open, onClose }: HowToPlayDialogProps) {
           </button>
         </header>
 
-        <div className="how-to-play-dialog__body">
-          <p className="how-to-play-dialog__intro">
-            Угадай секретный код из четырёх пони. После каждой попытки медали подскажут,
-            насколько близко ты к разгадке.
-          </p>
+        <div ref={bodyRef} className="how-to-play-dialog__body">
+          <ol className="how-to-play-dialog__steps" aria-label="Краткая инструкция">
+            {HOW_TO_PLAY_STEPS.map((step, index) => (
+              <li key={step} className="how-to-play-dialog__step">
+                <span className="how-to-play-dialog__step-number" aria-hidden="true">
+                  {index + 1}.
+                </span>
+                <span className="how-to-play-dialog__step-text">{step}</span>
+              </li>
+            ))}
+          </ol>
+
+          <p className="how-to-play-dialog__meta">Одна партия · примерно 5–10 минут</p>
 
           <div className="how-to-play-dialog__columns">
             <TutorialColumn
@@ -241,6 +302,17 @@ export function HowToPlayDialog({ open, onClose }: HowToPlayDialogProps) {
 
           <HowToPlayLegend />
         </div>
+
+        {showScrollHint ? (
+          <button
+            type="button"
+            className="how-to-play-dialog__scroll-hint"
+            onClick={scrollDown}
+            aria-label="Прокрутить вниз"
+          >
+            ↓
+          </button>
+        ) : null}
       </div>
     </div>
   );
