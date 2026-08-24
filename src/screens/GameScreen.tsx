@@ -41,6 +41,30 @@ export function GameScreen({ state, dispatch, actions }: GameScreenProps) {
         </div>
 
         <section
+          className="game-section game-section--history game-layout__history game-layout__history--desktop"
+          aria-labelledby="history-heading"
+        >
+          <h2 id="history-heading" className="section-heading">
+            История попыток
+          </h2>
+
+          {state.history.length === 0 ? (
+            <p className="empty-note">Пока нет подтверждённых попыток.</p>
+          ) : (
+            <ol className="guess-history">
+              {state.history.map((record, index) => (
+                <GuessRow
+                  key={`desktop-${index}-${record.guess.join("-")}`}
+                  record={record}
+                  attemptNumber={index + 1}
+                  gameMode={state.gameMode}
+                />
+              ))}
+            </ol>
+          )}
+        </section>
+
+        <section
           className="game-section game-section--current game-layout__current"
           aria-labelledby="current-guess-heading"
         >
@@ -73,46 +97,44 @@ export function GameScreen({ state, dispatch, actions }: GameScreenProps) {
 
         <HistoryCarousel history={state.history} gameMode={state.gameMode} />
 
-        <section
-          className="game-section game-section--history game-layout__history game-layout__history--desktop"
-          aria-labelledby="history-heading"
-        >
-          <h2 id="history-heading" className="section-heading">
-            История попыток
-          </h2>
-
-          {state.history.length === 0 ? (
-            <p className="empty-note">Пока нет подтверждённых попыток.</p>
-          ) : (
-            <ol className="guess-history">
-              {state.history.map((record, index) => (
-                <GuessRow
-                  key={`desktop-${index}-${record.guess.join("-")}`}
-                  record={record}
-                  attemptNumber={index + 1}
-                  gameMode={state.gameMode}
-                />
-              ))}
-            </ol>
-          )}
-        </section>
-
-        <section
-          className="game-section game-section--palette game-layout__palette"
-          aria-labelledby="palette-heading"
-        >
-          <h2 id="palette-heading" className="section-heading game-layout__palette-heading">
-            Выбери персонажа
-          </h2>
-
-          <CharacterPalette
-            onSelect={(ponyId) => dispatch(actions.addPony(ponyId))}
-            disabled={state.currentGuess.length >= CODE_LENGTH}
-          />
-        </section>
-
         <div className="game-layout__legend game-layout__legend--desktop">
           <FeedbackLegend compact gameMode={state.gameMode} />
+        </div>
+
+        <div className="game-play-zone game-layout__play">
+          <div className="game-actions game-layout__actions">
+            <button
+              type="button"
+              className="button"
+              onClick={() => dispatch(actions.removeLastPony())}
+              disabled={state.currentGuess.length === 0}
+            >
+              ← Удалить
+            </button>
+
+            <button
+              type="button"
+              className="button button--primary"
+              onClick={() => dispatch(actions.submitGuess())}
+              disabled={!canSubmit}
+            >
+              Подтвердить
+            </button>
+          </div>
+
+          <section
+            className="game-section game-section--palette game-layout__palette"
+            aria-labelledby="palette-heading"
+          >
+            <h2 id="palette-heading" className="section-heading game-layout__palette-heading">
+              Выбери персонажа
+            </h2>
+
+            <CharacterPalette
+              onSelect={(ponyId) => dispatch(actions.addPony(ponyId))}
+              disabled={state.currentGuess.length >= CODE_LENGTH}
+            />
+          </section>
         </div>
 
         <footer className="game-bottom-bar game-layout__bottom-bar">

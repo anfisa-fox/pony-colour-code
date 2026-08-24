@@ -128,7 +128,7 @@ body {
 }
 
 .start-header__title {
-  margin: 0 0 var(--space-sm);
+  margin: 0 0 var(--space-md);
   font-family: var(--font-display);
   font-size: clamp(1.45rem, 4.5vw, 1.85rem);
   font-weight: 700;
@@ -137,12 +137,12 @@ body {
 }
 
 .start-hero-ensemble {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-sm) var(--space-xs);
-  align-items: end;
-  justify-items: center;
-  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-end;
+  gap: var(--space-xs) clamp(0.25rem, 1.2vw, 0.65rem);
+  margin: 0 auto var(--space-md);
   padding: 0;
   max-width: 100%;
   list-style: none;
@@ -152,9 +152,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.3rem;
-  width: 100%;
+  gap: 0.4rem;
+  flex: 0 1 auto;
   min-width: 0;
+  max-width: 5.25rem;
 }
 
 .start-hero-ensemble__button {
@@ -194,12 +195,11 @@ body {
   align-items: flex-end;
   justify-content: center;
   width: 100%;
-  height: clamp(76px, 22vw, 98px);
 }
 
 .start-hero-ensemble__figure {
   display: block;
-  height: 100%;
+  height: clamp(96px, 13.5vw, 118px);
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -211,9 +211,9 @@ body {
 }
 
 .start-hero-ensemble__name {
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.25;
   text-align: center;
   color: var(--color-text);
   overflow-wrap: anywhere;
@@ -723,19 +723,19 @@ body {
 
 .character-card--palette .character-card__frame {
   width: 100%;
-  height: 72px;
-  padding: 2px 4px 0;
+  height: 96px;
+  padding: 6px 8px 4px;
   border-radius: 10px 10px 0 0;
   border: none;
   background: color-mix(in srgb, var(--token-color) 18%, var(--color-surface));
 }
 
 .character-card--palette .character-card__image {
-  max-height: 68px;
+  max-height: 86px;
   width: auto;
   max-width: 100%;
   object-position: center bottom;
-  transform-origin: center bottom;
+  transform-origin: center center;
 }
 
 .character-card--mirrored.character-card--palette .character-card__image {
@@ -850,10 +850,10 @@ body {
 }
 
 .character-palette__name {
-  padding: 4px 4px 6px;
-  font-size: 0.74rem;
+  padding: 6px 6px 8px;
+  font-size: 0.8rem;
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 /* ── Guess history ── */
@@ -1123,6 +1123,7 @@ body {
 }
 
 .game-layout__bottom-bar {
+  display: none;
   flex-shrink: 0;
   margin-inline: calc(var(--space-sm) * -1);
 }
@@ -1822,6 +1823,24 @@ body {
 /* ── Responsive ── */
 
 @media (min-width: 480px) {
+  .character-profile-overlay {
+    align-items: center;
+    padding: var(--space-md);
+  }
+
+  .character-profile-sheet {
+    width: min(100%, 26rem);
+    max-height: min(85dvh, 85vh);
+    border-bottom: 1px solid var(--color-border);
+    border-radius: calc(var(--radius) + 6px);
+  }
+
+  .character-profile-sheet__header {
+    padding: var(--space-sm) var(--space-sm) 0;
+  }
+}
+
+@media (min-width: 480px) {
   .screen__actions,
   .game-actions {
     flex-direction: row;
@@ -1858,12 +1877,8 @@ body {
     order: 41;
   }
 
-  .game-layout__bottom-bar {
-    order: 50;
-  }
-
   .game-layout__actions {
-    display: none;
+    order: 42;
   }
 }
 
@@ -1909,14 +1924,38 @@ body {
   }
 
   .screen--game .game-layout__history--desktop,
-  .screen--game .game-layout__legend--desktop {
+  .screen--game .game-layout__legend--desktop,
+  .screen--game .game-layout__actions {
     display: none;
   }
 
   .screen--game .game-layout__current {
+    order: 10;
     flex-shrink: 0;
     margin-bottom: 0;
     padding: 0.45rem var(--space-sm);
+  }
+
+  .screen--game .game-layout__history--mobile {
+    order: 20;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 auto;
+    min-height: 0;
+    margin-bottom: 0;
+    padding: 0.2rem 0;
+    overflow: hidden;
+  }
+
+  .screen--game .game-play-zone {
+    order: 30;
+    flex-shrink: 0;
+    display: block;
+    margin-top: 0;
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
   }
 
   .screen--game .current-guess-header {
@@ -1931,14 +1970,51 @@ body {
     font-size: 0.72rem;
   }
 
-  .screen--game .game-layout__history--mobile {
+  .screen--game .game-layout__bottom-bar {
+    order: 40;
     display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
-    min-height: 0;
+    flex-shrink: 0;
+    margin-top: auto;
+  }
+
+  .start-header__title {
+    margin-bottom: var(--space-sm);
+  }
+
+  .start-hero-ensemble {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-sm) var(--space-xs);
+    align-items: end;
+    justify-items: center;
     margin-bottom: 0;
-    padding: 0.2rem 0;
-    overflow: hidden;
+  }
+
+  .start-hero-ensemble__item {
+    gap: 0.3rem;
+    width: 100%;
+    max-width: none;
+  }
+
+  .start-hero-ensemble__button {
+    gap: 0.3rem;
+  }
+
+  .start-hero-ensemble__figure-wrap {
+    height: clamp(68px, 20vw, 84px);
+  }
+
+  .start-hero-ensemble__figure {
+    height: 100%;
+  }
+
+  .start-hero-ensemble__name {
+    font-size: 0.64rem;
+    line-height: 1.2;
+  }
+
+  .mode-selector {
+    grid-template-columns: 1fr;
   }
 
   .screen--game .history-carousel__header .section-heading {
@@ -1988,29 +2064,12 @@ body {
     min-height: 44px;
   }
 
-  .screen--game .game-layout__bottom-bar {
-    flex-shrink: 0;
-    margin-top: auto;
-  }
-
-  .mode-selector {
-    grid-template-columns: 1fr;
-  }
-
   .screen--start {
     gap: var(--space-md);
   }
 
   .start-header {
     padding: var(--space-sm) var(--space-xs);
-  }
-
-  .start-hero-ensemble__figure-wrap {
-    height: clamp(68px, 20vw, 84px);
-  }
-
-  .start-hero-ensemble__name {
-    font-size: 0.64rem;
   }
 
   .start-example {
